@@ -1,0 +1,41 @@
+@import '@fontsource-variable/inter';
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-coral-50: #fef3f3;
+  --color-coral-100: #fde4e4;
+  --color-coral-200: #fbcdce;
+  --color-coral-300: #f7a9ab;
+  --color-coral-400: #f47e81;
+  --color-coral-500: #ef5a5f;
+  --color-coral-600: #d93a40;
+  --color-coral-700: #b62c31;
+  --color-coral-800: #97282c;
+  --color-coral-900: #7e2629;
+
+  --color-ink-50: #f6f6f7;
+  --color-ink-100: #e2e3e6;
+  --color-ink-200: #c5c7cd;
+  --color-ink-300: #a0a3ac;
+  --color-ink-400: #7c7f8a;
+  --color-ink-500: #61646f;
+  --color-ink-600: #4c4e58;
+  --color-ink-700: #3f4148;
+  --color-ink-800: #26282e;
+  --color-ink-900: #16181d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-ink-800 antialiased;
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-coral-100);
+}
