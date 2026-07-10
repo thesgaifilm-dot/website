@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
+import PageHero from '../components/PageHero'
+import Reveal from '../components/Reveal'
 import { site } from '../data/site'
 
 const interests = [
@@ -7,7 +9,7 @@ const interests = [
   'HR & workforce consultancy',
   'AI solutions',
   'Digital transformation / marketing',
-  'Not sure yet — advise me',
+  'Not sure yet, advise me',
 ]
 
 const companySizes = ['1–10 employees', '11–50 employees', '51–200 employees', 'More than 200 employees']
@@ -29,7 +31,7 @@ export default function Contact() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     const text = [
-      `Hello Niut, I'd like to book a consultation.`,
+      `Hello Miss Niu, I'd like to book a consultation.`,
       `Name: ${form.name}`,
       `Company: ${form.company}`,
       form.email && `Email: ${form.email}`,
@@ -48,21 +50,15 @@ export default function Contact() {
 
   return (
     <>
-      <section className="bg-ink-900">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <p className="text-sm font-bold uppercase tracking-[0.25em] text-coral-400">Contact Us</p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Book your free consultation
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg text-ink-200">
-            No obligation, no jargon. Tell us about your business and we'll tell you — honestly —
-            where the opportunities are and whether a project makes sense.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title="Contact Us"
+        subtitle="Book your free consultation"
+        image="/media/hero-contact.jpg"
+      />
 
-      <section className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.4fr_1fr]">
+      <section className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.4fr_1fr]">
         {/* Form */}
+        <Reveal>
         <form onSubmit={handleSubmit} className="rounded-3xl border border-ink-100 p-7 sm:p-10">
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="block">
@@ -124,12 +120,14 @@ export default function Contact() {
             Send via WhatsApp →
           </button>
           <p className="mt-3 text-xs text-ink-500">
-            Submitting opens WhatsApp with your message pre-filled — nothing is sent until you press
-            send there. We respond within one business day.
+            Submitting opens WhatsApp with your message pre-filled. Nothing is sent until you press
+            send there, and we respond within one business day.
           </p>
         </form>
+        </Reveal>
 
         {/* Sidebar */}
+        <Reveal delay={140}>
         <div className="space-y-6">
           <div className="rounded-3xl bg-ink-900 p-8">
             <h2 className="text-lg font-bold text-white">Prefer to talk directly?</h2>
@@ -152,35 +150,8 @@ export default function Contact() {
             </p>
           </div>
 
-          <div className="rounded-3xl border border-ink-100 p-8">
-            <h2 className="text-lg font-bold text-ink-900">What to prepare</h2>
-            <p className="mt-2 text-sm text-ink-600">That's all we need to get started — we handle the rest.</p>
-            <ul className="mt-4 space-y-3">
-              {[
-                'A short overview of your business',
-                'Your growth goals or the challenge at hand',
-                'Any timelines or budgets already in mind',
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-ink-800">
-                  <svg viewBox="0 0 24 24" className="mt-0.5 h-5 w-5 shrink-0 text-coral-500" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 13l4 4L19 7" />
-                  </svg>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="rounded-3xl bg-coral-50 p-8">
-            <h2 className="text-lg font-bold text-ink-900">Our promises</h2>
-            <ul className="mt-4 space-y-3 text-sm text-ink-700">
-              <li>✓ NDA available before any detailed discussion</li>
-              <li>✓ Response within one business day</li>
-              <li>✓ Honest advice — if we're not the right fit, we'll say so</li>
-              <li>✓ No fees before we've agreed on a scope together</li>
-            </ul>
-          </div>
         </div>
+        </Reveal>
       </section>
     </>
   )

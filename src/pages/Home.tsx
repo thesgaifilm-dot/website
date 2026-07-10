@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import StatsStrip from '../components/StatsStrip'
-import CTASection from '../components/CTASection'
 import SectionHeading from '../components/SectionHeading'
-import { serviceSummaries, footprint, processSteps, site } from '../data/site'
+import Reveal from '../components/Reveal'
+import Typewriter from '../components/Typewriter'
+import ReviewsSection from '../components/ReviewsSection'
+import { serviceSummaries, footprint, processSteps } from '../data/site'
 import { caseStudies } from '../data/caseStudies'
 
 const icons: Record<string, React.ReactNode> = {
@@ -14,6 +17,7 @@ const icons: Record<string, React.ReactNode> = {
 
 export default function Home() {
   const featured = caseStudies.slice(0, 3)
+  const [typed, setTyped] = useState(false)
 
   return (
     <>
@@ -23,7 +27,7 @@ export default function Home() {
           src="/media/hero-singapore.jpg"
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="hero-img-anim absolute inset-0 h-full w-full object-cover object-center"
         />
         <div
           className="absolute inset-0 bg-ink-900/65 lg:bg-transparent lg:bg-gradient-to-r lg:from-ink-900 lg:via-ink-900/80 lg:to-ink-900/30"
@@ -35,19 +39,22 @@ export default function Home() {
         />
 
         <div className="relative mx-auto max-w-6xl px-4 py-28 sm:px-6 lg:py-40">
-          <p className="text-sm font-bold uppercase tracking-[0.25em] text-coral-400">
+          <p className="hero-anim text-sm font-bold uppercase tracking-[0.25em] text-coral-400">
             Miss Niu Technology · Singapore
           </p>
           <h1 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Growth, engineered — <span className="text-coral-400">across borders</span>, teams and
-            technology
+            <Typewriter
+              segments={[
+                { text: 'We engineer ' },
+                { text: 'growth', className: 'text-coral-400' },
+                { text: ' across borders, teams and technology' },
+              ]}
+              speed={32}
+              startDelay={600}
+              onDone={() => setTyped(true)}
+            />
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-100">
-            Overseas development, HR and workforce consultancy, and AI-driven transformation — one
-            partner that designs the strategy and executes it on the ground. Over 200 businesses
-            advised since 2019.
-          </p>
-          <div className="mt-9 flex flex-wrap gap-4">
+          <div className={`mt-9 flex flex-wrap gap-4 ${typed ? 'hero-anim' : 'opacity-0'}`}>
             <Link
               to="/contact"
               className="rounded-full bg-coral-500 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-coral-500/25 transition-colors hover:bg-coral-600"
@@ -61,16 +68,13 @@ export default function Home() {
               Explore Our Services
             </Link>
           </div>
-          <p className="mt-10 text-xs font-medium uppercase tracking-[0.2em] text-ink-300">
+          <p
+            className={`mt-10 text-xs font-medium uppercase tracking-[0.2em] text-ink-300 ${typed ? 'hero-anim' : 'opacity-0'}`}
+            style={{ animationDelay: '0.45s' }}
+          >
             As featured on&nbsp;&nbsp;CNA&nbsp;&nbsp;·&nbsp;&nbsp;TODAY&nbsp;&nbsp;·&nbsp;&nbsp;Channel 8
           </p>
 
-          <div className="absolute bottom-10 right-6 hidden rounded-2xl border border-white/10 bg-ink-900/75 px-5 py-4 shadow-xl backdrop-blur lg:block">
-            <p className="text-2xl font-extrabold text-coral-400">10 markets</p>
-            <p className="mt-0.5 text-xs font-medium text-ink-300">
-              on-the-ground presence across Asia
-            </p>
-          </div>
         </div>
       </section>
 
@@ -81,40 +85,41 @@ export default function Home() {
         <SectionHeading
           eyebrow="What we do"
           title="Four ways we grow your business"
-          body="One firm, end to end: we design the strategy, build the team and execute it on the ground — in Singapore and across Asia."
+          body="One firm, end to end: we design the strategy, build the team and execute it on the ground in Singapore and across Asia."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {serviceSummaries.map((s) => (
-            <Link
-              key={s.id}
-              to={`/services#${s.id}`}
-              className="group rounded-2xl border border-ink-100 p-7 transition-all hover:-translate-y-1 hover:border-coral-300 hover:shadow-lg"
-            >
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-coral-50 text-coral-600">
-                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  {icons[s.icon]}
-                </svg>
-              </span>
-              <h3 className="mt-5 text-xl font-bold text-ink-900 group-hover:text-coral-600">{s.title}</h3>
-              <p className="mt-2 leading-relaxed text-ink-600">{s.blurb}</p>
-              <span className="mt-4 inline-block text-sm font-semibold text-coral-600">Learn more →</span>
-            </Link>
+          {serviceSummaries.map((s, i) => (
+            <Reveal key={s.id} delay={i * 90}>
+              <Link
+                to={`/services#${s.id}`}
+                className="group block h-full rounded-2xl border border-ink-100 p-7 transition-all hover:-translate-y-1 hover:border-coral-300 hover:shadow-lg"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-coral-50 text-coral-600">
+                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    {icons[s.icon]}
+                  </svg>
+                </span>
+                <h3 className="mt-5 text-xl font-bold text-ink-900 group-hover:text-coral-600">{s.title}</h3>
+                <p className="mt-2 leading-relaxed text-ink-600">{s.blurb}</p>
+                <span className="mt-4 inline-block text-sm font-semibold text-coral-600">Learn more →</span>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      {/* Why Niut / footprint */}
+      {/* Why Miss Niu / footprint */}
       <section className="bg-ink-50">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2">
           <div>
             <SectionHeading
-              eyebrow="Why Niut"
+              eyebrow="Why Miss Niu"
               title="A lean hub, a deep network"
-              body="Niut runs a hub-and-spoke model: a lean Singapore core team, ~80 project consultants, and our own staffed offices in China and Malaysia. You get on-the-ground execution across Asia without paying for a bloated consultancy."
+              body="Miss Niu runs a hub-and-spoke model: a lean Singapore core team, 80+ project consultants, and our own staffed offices in China and Malaysia. You get on-the-ground execution across Asia without paying for a bloated consultancy."
             />
-            <ul className="mt-8 space-y-4">
+            <Reveal delay={120}><ul className="mt-8 space-y-4">
               {[
-                'Our own offices — not just partners — in China and Malaysia',
+                'Our own offices, not just partners, in China and Malaysia',
                 'Live working partners in seven more Asian markets',
                 'Close to 100 AI developers across four countries',
                 'NDA-first confidentiality: we never publish client names',
@@ -126,9 +131,9 @@ export default function Home() {
                   {point}
                 </li>
               ))}
-            </ul>
+            </ul></Reveal>
           </div>
-          <div className="rounded-2xl bg-white p-8 shadow-sm">
+          <Reveal delay={180} className="h-full"><div className="rounded-2xl bg-white p-8 shadow-sm">
             <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-coral-600">Our reach</h3>
             <div className="mt-5">
               <p className="text-sm font-semibold text-ink-500">Own offices</p>
@@ -151,10 +156,10 @@ export default function Home() {
               </div>
             </div>
             <p className="mt-6 text-sm leading-relaxed text-ink-500">
-              Wherever you need to do business in Asia, we have people who can act — for market
+              Wherever you need to do business in Asia, we have people who can act: market
               representative agreements, regulatory filings and everything in between.
             </p>
-          </div>
+          </div></Reveal>
         </div>
       </section>
 
@@ -167,12 +172,14 @@ export default function Home() {
           center
         />
         <div className="mt-12 grid gap-8 md:grid-cols-3">
-          {processSteps.map((s) => (
-            <div key={s.step} className="relative rounded-2xl border border-ink-100 p-7">
-              <span className="text-5xl font-extrabold text-coral-100">{s.step}</span>
-              <h3 className="mt-3 text-lg font-bold text-ink-900">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.body}</p>
-            </div>
+          {processSteps.map((s, i) => (
+            <Reveal key={s.step} delay={i * 110}>
+              <div className="relative h-full rounded-2xl border border-ink-100 p-7">
+                <span className="text-5xl font-extrabold text-coral-100">{s.step}</span>
+                <h3 className="mt-3 text-lg font-bold text-ink-900">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.body}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -180,7 +187,7 @@ export default function Home() {
       {/* Case studies */}
       <section className="bg-ink-900">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <div className="flex flex-wrap items-end justify-between gap-4">
+          <Reveal className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.2em] text-coral-400">Proven in the field</p>
               <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
@@ -190,13 +197,13 @@ export default function Home() {
             <Link to="/about#case-studies" className="text-sm font-semibold text-coral-400 hover:text-coral-300">
               View all case studies →
             </Link>
-          </div>
+          </Reveal>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {featured.map((c) => (
+            {featured.map((c, i) => (
+              <Reveal key={c.id} delay={i * 110} className="h-full">
               <Link
-                key={c.id}
                 to="/about#case-studies"
-                className="group flex flex-col rounded-2xl bg-ink-800 p-7 transition-colors hover:bg-ink-700"
+                className="group flex h-full flex-col rounded-2xl bg-ink-800 p-7 transition-colors hover:bg-ink-700"
               >
                 <p className="text-xs font-semibold uppercase tracking-wider text-ink-400">
                   {c.jurisdictions.join(' · ')}
@@ -209,18 +216,16 @@ export default function Home() {
                   {c.highlight}
                 </p>
               </Link>
+              </Reveal>
             ))}
           </div>
           <p className="mt-8 text-xs text-ink-500">
-            Case studies are anonymised to protect client confidentiality — a commitment we extend to you.
+            Case studies are anonymised to protect client confidentiality, a commitment we extend to you.
           </p>
         </div>
       </section>
 
-      <CTASection
-        title="Ready to plan your next stage of growth?"
-        body={`A free, no-obligation consultation — or message us directly on WhatsApp at ${site.phone}.`}
-      />
+      <ReviewsSection />
     </>
   )
 }

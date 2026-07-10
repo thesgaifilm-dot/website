@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-ink-100 bg-white/90 backdrop-blur">
       <nav className="mx-auto flex h-18 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link to="/" onClick={() => setOpen(false)} aria-label="Niut — Miss Niu Technology, home">
+        <Link to="/" onClick={() => setOpen(false)} aria-label="Miss Niu Technology, home">
           <Logo />
         </Link>
 

@@ -8,19 +8,6 @@ export default function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <Logo light />
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-300">
-            {site.legalName}, operating as {site.brand} — a strategic development and global growth
-            architecture firm headquartered in Singapore, with our own offices in China and Malaysia
-            and live partners across Asia.
-          </p>
-          <a
-            href={site.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-coral-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-coral-600"
-          >
-            WhatsApp us — {site.phone}
-          </a>
         </div>
 
         <div>
@@ -45,12 +32,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-ink-800">
-        <div className="mx-auto max-w-6xl space-y-3 px-4 py-6 text-xs leading-relaxed text-ink-400 sm:px-6">
-          <p>
-            Client case studies are anonymised. We never publish client names, contract terms or
-            confidential data, and we are ready to sign a Non-Disclosure Agreement before any detailed
-            discussion.
-          </p>
+        <div className="mx-auto max-w-6xl px-4 py-6 text-xs leading-relaxed text-ink-400 sm:px-6">
           <p>
             © {new Date().getFullYear()} {site.legalName}. All rights reserved.
           </p>

@@ -1,5 +1,5 @@
 export const site = {
-  brand: 'Niut',
+  brand: 'Miss Niu',
   legalName: 'Miss Niu Technology Pte Ltd',
   tagline: 'Strategic development and global growth architecture for ambitious businesses.',
   phone: '+65 8782 4594',
@@ -8,11 +8,11 @@ export const site = {
   infoAsOf: 'July 2026',
 }
 
-export const stats = [
+export const stats: { value: number; label: string; prefix?: string; suffix?: string }[] = [
   { value: 200, suffix: '+', label: 'Businesses advised since 2019' },
   { value: 10, label: 'Asian markets with on-the-ground presence' },
-  { value: 100, prefix: '~', label: 'Development and delivery specialists across four countries' },
-  { value: 80, label: 'People in the largest team we built — in four months' },
+  { value: 100, suffix: '+', label: 'Development and delivery specialists across four countries' },
+  { value: 80, label: 'People in our largest team, built in four months' },
 ]
 
 export const serviceSummaries = [
@@ -27,7 +27,7 @@ export const serviceSummaries = [
     id: 'hr',
     title: 'HR & Workforce Consultancy',
     blurb:
-      'Rapid team building, talent acquisition strategy, workforce development and organisational design — proven at scale, from 20 to 80 people in months.',
+      'Rapid team building, talent acquisition strategy, workforce development and organisational design, proven at scale from 20 to 80 people in months.',
     icon: 'people',
   },
   {
@@ -55,16 +55,16 @@ export const processSteps = [
   {
     step: '01',
     title: 'Discovery consultation',
-    body: 'Tell us your goals. We assess your operations, market position and growth options — no obligation, NDA available before any detailed discussion.',
+    body: 'Tell us your goals. We assess your operations, market position and growth options. No obligation, and an NDA is available before any detailed discussion.',
   },
   {
     step: '02',
     title: 'Strategy & roadmap',
-    body: 'You receive a clear, costed plan: what to build, where to expand, who to hire and in what order — grounded in what we have executed for 200+ businesses.',
+    body: 'You receive a clear, costed plan: what to build, where to expand, who to hire and in what order, grounded in what we have executed for over 200 businesses.',
   },
   {
     step: '03',
     title: 'Execution & support',
-    body: 'Our teams deliver on the ground — in Singapore and across Asia — and stay with you through implementation, training and follow-through.',
+    body: 'Our teams deliver on the ground in Singapore and across Asia, staying with you through implementation, training and follow-through.',
   },
 ]

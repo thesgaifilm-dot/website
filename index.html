@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Niut (Miss Niu Technology Pte Ltd) is a strategic development and global growth architecture firm — overseas development consultation, HR & workforce consultancy, AI solutions and digital transformation across Asia."
+      content="Miss Niu Technology Pte Ltd is a strategic development and global growth architecture firm offering overseas development consultation, HR & workforce consultancy, AI solutions and digital transformation across Asia."
     />
-    <title>Niut — Overseas Development, HR &amp; AI Consultancy | Miss Niu Technology</title>
+    <title>Miss Niu Technology | Overseas Development, HR &amp; AI Consultancy</title>
     <style>
       #app-loader {
         position: fixed;
@@ -62,7 +62,7 @@
         letter-spacing: 0.35em;
       }
       #app-loader .loader-bar {
-        width: 160px;
+        width: 180px;
         height: 3px;
         border-radius: 999px;
         background: #26282e;
@@ -71,11 +71,11 @@
       #app-loader .loader-bar::after {
         content: '';
         display: block;
-        width: 40%;
+        width: 0;
         height: 100%;
         border-radius: 999px;
         background: #ef5a5f;
-        animation: loader-slide 1.2s ease-in-out infinite;
+        animation: loader-progress 1.4s forwards;
       }
       @keyframes loader-pulse {
         0%, 100% { transform: scale(1); }
@@ -85,14 +85,26 @@
         0% { stroke-dashoffset: 120; }
         55%, 100% { stroke-dashoffset: 0; }
       }
-      @keyframes loader-slide {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(400%); }
+      @keyframes loader-progress {
+        0% {
+          width: 0;
+          animation-timing-function: cubic-bezier(0.1, 0.7, 0.3, 1);
+        }
+        42% {
+          width: 80%;
+          animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+        }
+        100% {
+          width: 100%;
+        }
       }
       @media (prefers-reduced-motion: reduce) {
         #app-loader .loader-mark,
         #app-loader .loader-bar::after {
           animation: none;
+        }
+        #app-loader .loader-bar::after {
+          width: 100%;
         }
         #app-loader .loader-mark .n-path {
           animation: none;
