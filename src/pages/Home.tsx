@@ -81,7 +81,7 @@ export default function Home() {
 
       <StatsStrip />
 
-      {/* Strategic partners — moved here from About; clients wall lives there now */}
+      {/* Strategic partners: moved here from About; clients wall lives there now */}
       <PartnersCarousel />
 
       {/* Services overview */}

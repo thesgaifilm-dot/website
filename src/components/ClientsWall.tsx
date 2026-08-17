@@ -2,7 +2,7 @@ import SectionHeading from './SectionHeading'
 import { clients, type ClientLogo } from '../data/clients'
 
 /**
- * The client carousel — three marquee rows of identical white tiles
+ * The client carousel: three marquee rows of identical white tiles
  * (same grammar as the partners carousel on Home), alternating
  * direction, paused on hover. Mixed png/jpg/webp/avif logos read as
  * one clean set on the uniform tiles.
@@ -44,7 +44,7 @@ export default function ClientsWall() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading eyebrow="Our clients" title="Brands that trust Miss Niu" center />
         <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-ink-600">
-          From homegrown F&amp;B names to insurers, clinics, and construction firms —
+          From homegrown F&amp;B names to insurers, clinics, and construction firms:
           {` ${clients.length}`}+ businesses across Singapore and the region.
         </p>
       </div>

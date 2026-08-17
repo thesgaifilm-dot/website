@@ -1,5 +1,5 @@
 /**
- * Client logo wall — generated from the /Clients folder drop.
+ * Client logo wall: generated from the /Clients folder drop.
  * Files live in public/media/clients (normalised names).
  */
 

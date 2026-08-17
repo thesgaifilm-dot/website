@@ -4,7 +4,7 @@ import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 
 /**
- * PRIVATE consulting checkout — deliberately unlisted (no nav/footer
+ * PRIVATE consulting checkout: deliberately unlisted (no nav/footer
  * links, noindex). Each service checks out through a Stripe-hosted
  * Payment Link: card details never touch this site, and no secret
  * keys live in this codebase.
@@ -16,7 +16,7 @@ const services = [
     scope: '90 minutes · senior consultant',
     price: 'S$380',
     blurb:
-      'A focused diagnosis across market entry, workforce, and AI opportunity — finishing with a written action summary you keep.',
+      'A focused diagnosis across market entry, workforce, and AI opportunity, finishing with a written action summary you keep.',
     includes: ['90-minute session (in person or video)', 'Pre-session questionnaire review', 'Written action summary within 3 days'],
     link: 'https://buy.stripe.com/3cI5kvaiLdTIgeB80357W01',
   },
@@ -100,7 +100,7 @@ export default function ConsultingSuite() {
 
         <p className="mx-auto mt-10 max-w-xl text-center text-xs leading-relaxed text-ink-500">
           Payments are processed by Stripe over an encrypted connection. Card details never
-          touch our servers. Invoiced engagements remain available — contact us if your
+          touch our servers. Invoiced engagements remain available. Contact us if your
           company requires PO-based billing.
         </p>
       </section>

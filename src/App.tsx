@@ -39,7 +39,7 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          {/* Unlisted — direct link only, noindex; not in nav or footer */}
+          {/* Unlisted: direct link only, noindex; not in nav or footer */}
           <Route path="/consulting-suite-mq7x" element={<ConsultingSuite />} />
           <Route path="*" element={<Home />} />
         </Routes>

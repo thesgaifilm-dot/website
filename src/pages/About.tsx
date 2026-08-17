@@ -128,7 +128,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Client logo wall — every brand on an identical white tile */}
+      {/* Client logo wall: every brand on an identical white tile */}
       <ClientsWall />
 
       <CTASection title="Let's talk about your growth plans" />
