@@ -30,10 +30,13 @@ export default function App() {
     }
   }, [])
 
+  // The analytics page is a standalone tool view: no site chrome.
+  const bare = location.pathname === '/site-analytics-k4n8'
+
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
-      <Navbar />
+      {!bare && <Navbar />}
       <main key={location.pathname} className="page-fade flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -46,8 +49,8 @@ export default function App() {
           <Route path="*" element={<Home />} />
         </Routes>
       </main>
-      <Footer />
-      <WhatsAppFloat />
+      {!bare && <Footer />}
+      {!bare && <WhatsAppFloat />}
     </div>
   )
 }

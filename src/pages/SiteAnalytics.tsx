@@ -1,28 +1,30 @@
 import { useEffect, useState } from 'react'
 
 /**
- * PRIVATE site analytics: unlisted (no nav/footer links, noindex).
- * Sample reporting period Jul 12–18; swap in a live provider
- * (Vercel Analytics / GA4 / Plausible) to feed this layout real data.
+ * PRIVATE analytics view: unlisted (no nav/footer links, noindex),
+ * rendered without site chrome. GA4-style tool aesthetic (white app
+ * bar, gray canvas, blue single-hue marks) without any Google
+ * branding. Sample reporting period Jul 12-18; swap in a live
+ * provider to feed this layout real data.
  */
 
 const week = [
-  { day: 'Sun', date: 'Jul 12', visitors: 1 },
-  { day: 'Mon', date: 'Jul 13', visitors: 2 },
-  { day: 'Tue', date: 'Jul 14', visitors: 1 },
-  { day: 'Wed', date: 'Jul 15', visitors: 2 },
-  { day: 'Thu', date: 'Jul 16', visitors: 2 },
-  { day: 'Fri', date: 'Jul 17', visitors: 5 },
-  { day: 'Sat', date: 'Jul 18', visitors: 5 },
+  { day: 'S', date: 'Jul 12', visitors: 1 },
+  { day: 'M', date: 'Jul 13', visitors: 2 },
+  { day: 'T', date: 'Jul 14', visitors: 1 },
+  { day: 'W', date: 'Jul 15', visitors: 2 },
+  { day: 'T', date: 'Jul 16', visitors: 2 },
+  { day: 'F', date: 'Jul 17', visitors: 5 },
+  { day: 'S', date: 'Jul 18', visitors: 5 },
 ]
 
 const totalVisitors = week.reduce((s, d) => s + d.visitors, 0)
 
 const kpis = [
-  { label: 'Visitors', value: String(totalVisitors), sub: '+38% vs prior week' },
-  { label: 'Page views', value: '41', sub: '2.3 pages / visit' },
-  { label: 'Avg. session', value: '1m 42s', sub: 'engaged time' },
-  { label: 'Bounce rate', value: '61%', sub: 'single-page visits' },
+  { label: 'Users', value: String(totalVisitors), sub: '+38% vs previous period' },
+  { label: 'Event count', value: '113', sub: 'all events' },
+  { label: 'Views', value: '41', sub: '2.3 per session' },
+  { label: 'Average engagement time', value: '1m 42s', sub: 'per active user' },
 ]
 
 const topPages = [
@@ -35,14 +37,9 @@ const topPages = [
 
 const sources = [
   { name: 'Direct', visitors: 8 },
-  { name: 'Google Search', visitors: 5 },
-  { name: 'LinkedIn', visitors: 3 },
-  { name: 'WhatsApp', visitors: 2 },
-]
-
-const devices = [
-  { name: 'Mobile', visitors: 11 },
-  { name: 'Desktop', visitors: 7 },
+  { name: 'Organic Search', visitors: 5 },
+  { name: 'Organic Social', visitors: 3 },
+  { name: 'Referral', visitors: 2 },
 ]
 
 const countries = [
@@ -51,21 +48,39 @@ const countries = [
   { name: 'China', visitors: 2 },
 ]
 
-function HBar({ label, value, max }: { label: string; value: number; max: number }) {
+const devices = [
+  { name: 'mobile', visitors: 11 },
+  { name: 'desktop', visitors: 7 },
+]
+
+const GA_BLUE = '#1a73e8'
+const INK = '#202124'
+const MUTED = '#5f6368'
+const BORDER = '#dadce0'
+const GRID = '#e8eaed'
+
+function Card({ title, children, right }: { title: string; children: React.ReactNode; right?: React.ReactNode }) {
   return (
-    <li className="flex items-center gap-3">
-      <span className="w-40 truncate text-sm text-ink-700 sm:w-48" title={label}>
-        {label}
-      </span>
-      <span className="relative h-2.5 flex-1 overflow-hidden rounded-full bg-ink-50">
-        <span
-          className="absolute inset-y-0 left-0 rounded-full bg-coral-500"
-          style={{ width: `${(value / max) * 100}%` }}
-        />
-      </span>
-      <span className="w-8 text-right text-sm font-semibold tabular-nums text-ink-900">
-        {value}
-      </span>
+    <div className="rounded-lg border bg-white p-5" style={{ borderColor: BORDER }}>
+      <div className="flex items-baseline justify-between">
+        <h2 className="text-sm font-medium" style={{ color: INK }}>{title}</h2>
+        {right}
+      </div>
+      {children}
+    </div>
+  )
+}
+
+function RankRow({ label, value, max }: { label: string; value: number; max: number }) {
+  return (
+    <li className="py-2" style={{ borderBottom: `1px solid ${GRID}` }}>
+      <div className="flex items-center justify-between gap-4">
+        <span className="truncate text-[13px]" style={{ color: INK }} title={label}>{label}</span>
+        <span className="text-[13px] tabular-nums" style={{ color: INK }}>{value}</span>
+      </div>
+      <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full" style={{ background: GRID }}>
+        <div className="h-full rounded-full" style={{ width: `${(value / max) * 100}%`, background: GA_BLUE }} />
+      </div>
     </li>
   )
 }
@@ -73,7 +88,6 @@ function HBar({ label, value, max }: { label: string; value: number; max: number
 export default function SiteAnalytics() {
   const [hover, setHover] = useState<number | null>(null)
 
-  // Unlisted: keep search engines out.
   useEffect(() => {
     const meta = document.createElement('meta')
     meta.name = 'robots'
@@ -82,164 +96,149 @@ export default function SiteAnalytics() {
     return () => { document.head.removeChild(meta) }
   }, [])
 
-  const maxV = Math.max(...week.map((d) => d.visitors))
+  const maxV = 5
   const maxPage = Math.max(...topPages.map((p) => p.views))
   const maxSrc = Math.max(...sources.map((s) => s.visitors))
 
-  // Bar chart geometry (SVG units)
-  const W = 640
-  const H = 220
-  const PAD = { t: 16, r: 8, b: 30, l: 28 }
+  // Users-over-time line (GA4 snapshot style)
+  const W = 720
+  const H = 200
+  const PAD = { t: 14, r: 12, b: 26, l: 26 }
   const plotW = W - PAD.l - PAD.r
   const plotH = H - PAD.t - PAD.b
-  const band = plotW / week.length
-  const barW = Math.min(44, band * 0.55)
+  const x = (i: number) => PAD.l + (plotW / (week.length - 1)) * i
   const y = (v: number) => PAD.t + plotH - (v / maxV) * plotH
+  const linePath = week.map((d, i) => `${i === 0 ? 'M' : 'L'}${x(i)},${y(d.visitors)}`).join(' ')
+  const areaPath = `${linePath} L${x(week.length - 1)},${y(0)} L${x(0)},${y(0)} Z`
 
   return (
-    <div className="bg-ink-50/60">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        {/* Header */}
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-coral-600">
-              Site analytics
-            </p>
-            <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-ink-900">
-              missniu.com
-            </h1>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="rounded-full border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-ink-700">
+    <div className="min-h-screen" style={{ background: '#f8f9fa', color: INK }}>
+      {/* App bar — tool chrome, not site chrome */}
+      <header className="sticky top-0 z-20 border-b bg-white" style={{ borderColor: BORDER }}>
+        <div className="flex h-14 items-center gap-4 px-4 sm:px-6">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full" aria-hidden="true">
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill={MUTED}>
+              <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" />
+            </svg>
+          </span>
+          <span className="text-[22px]" style={{ color: MUTED }}>Analytics</span>
+          <span className="hidden items-center gap-2 rounded px-3 py-1.5 text-sm sm:flex" style={{ color: INK }}>
+            missniu.com
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill={MUTED}><path d="M7 10l5 5 5-5z" /></svg>
+          </span>
+          <div className="ml-auto flex items-center gap-3">
+            <span className="hidden rounded border px-3 py-1.5 text-[13px] sm:block" style={{ borderColor: BORDER, color: MUTED }}>
               Jul 12 – Jul 18
             </span>
-            <span className="flex items-center gap-2 rounded-full border border-ink-200 bg-white px-4 py-2 text-sm text-ink-700">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              0 active now
+            <span
+              className="flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium text-white"
+              style={{ background: GA_BLUE }}
+              aria-hidden="true"
+            >
+              M
             </span>
           </div>
         </div>
+      </header>
 
-        {/* KPI tiles */}
-        <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h1 className="text-[22px] font-normal" style={{ color: INK }}>Reports snapshot</h1>
+          <span className="text-[13px]" style={{ color: MUTED }}>Jul 12 – Jul 18</span>
+        </div>
+
+        {/* KPI strip */}
+        <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
           {kpis.map((k) => (
-            <div key={k.label} className="rounded-2xl border border-ink-100 bg-white p-5 shadow-sm">
-              <p className="text-xs font-semibold uppercase tracking-wider text-ink-500">{k.label}</p>
-              <p className="mt-2 text-3xl font-extrabold tabular-nums tracking-tight text-ink-900">
-                {k.value}
-              </p>
-              <p className="mt-1 text-xs text-ink-500">{k.sub}</p>
+            <div key={k.label} className="rounded-lg border bg-white p-4" style={{ borderColor: BORDER }}>
+              <p className="text-xs" style={{ color: MUTED }}>{k.label}</p>
+              <p className="mt-1.5 text-[28px] leading-none tabular-nums" style={{ color: INK }}>{k.value}</p>
+              <p className="mt-1.5 text-xs" style={{ color: MUTED }}>{k.sub}</p>
             </div>
           ))}
         </div>
 
-        {/* Visitors chart */}
-        <div className="mt-6 rounded-2xl border border-ink-100 bg-white p-6 shadow-sm">
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-ink-700">
-              Daily visitors
-            </h2>
-            <p className="text-xs text-ink-500">{totalVisitors} this period</p>
-          </div>
-          <div className="relative mt-4">
-            <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={`Daily visitors, July 12 to 18: ${week.map((d) => `${d.date} ${d.visitors}`).join(', ')}`}>
-              {/* recessive grid */}
-              {[0, Math.ceil(maxV / 2), maxV].map((tick) => (
-                <g key={tick}>
-                  <line x1={PAD.l} x2={W - PAD.r} y1={y(tick)} y2={y(tick)} stroke="#eef0f3" strokeWidth="1" />
-                  <text x={PAD.l - 8} y={y(tick) + 4} textAnchor="end" fontSize="11" fill="#8a94a6">
-                    {tick}
-                  </text>
-                </g>
-              ))}
-              {week.map((d, i) => {
-                const cx = PAD.l + band * i + band / 2
-                const barY = y(d.visitors)
-                const isHover = hover === i
-                return (
-                  <g
-                    key={d.date}
-                    onMouseEnter={() => setHover(i)}
-                    onMouseLeave={() => setHover(null)}
-                  >
-                    {/* generous hit target */}
-                    <rect x={PAD.l + band * i} y={PAD.t} width={band} height={plotH} fill="transparent" />
-                    <rect
-                      x={cx - barW / 2}
-                      y={barY}
-                      width={barW}
-                      height={y(0) - barY}
-                      rx="4"
-                      fill={isHover ? '#d93a40' : '#ef5a5f'}
-                    />
-                    {/* value label in ink, not series color */}
-                    <text x={cx} y={barY - 7} textAnchor="middle" fontSize="12" fontWeight="600" fill="#3d4657">
-                      {d.visitors}
-                    </text>
-                    <text x={cx} y={H - 10} textAnchor="middle" fontSize="11" fill="#8a94a6">
-                      {d.day}
-                    </text>
-                  </g>
-                )
-              })}
-            </svg>
-            {hover !== null && (
-              <div
-                className="pointer-events-none absolute -top-1 rounded-lg border border-ink-100 bg-white px-3 py-1.5 text-xs shadow-md"
-                style={{ left: `${((PAD.l + band * hover + band / 2) / W) * 100}%`, transform: 'translateX(-50%)' }}
+        {/* Users over time + realtime */}
+        <div className="mt-4 grid gap-4 lg:grid-cols-[2fr_1fr]">
+          <Card title="Users over time" right={<span className="text-xs" style={{ color: MUTED }}>{totalVisitors} users</span>}>
+            <div className="relative mt-3">
+              <svg
+                viewBox={`0 0 ${W} ${H}`}
+                className="w-full"
+                role="img"
+                aria-label={`Users per day, July 12 to 18: ${week.map((d) => `${d.date} ${d.visitors}`).join(', ')}`}
               >
-                <span className="font-semibold text-ink-900">{week[hover].date}</span>
-                <span className="ml-2 text-ink-600">
-                  {week[hover].visitors} visitor{week[hover].visitors === 1 ? '' : 's'}
-                </span>
-              </div>
-            )}
-          </div>
+                {[0, 5].map((tick) => (
+                  <g key={tick}>
+                    <line x1={PAD.l} x2={W - PAD.r} y1={y(tick)} y2={y(tick)} stroke={GRID} strokeWidth="1" />
+                    <text x={PAD.l - 8} y={y(tick) + 4} textAnchor="end" fontSize="11" fill={MUTED}>{tick}</text>
+                  </g>
+                ))}
+                <path d={areaPath} fill={GA_BLUE} opacity="0.08" />
+                <path d={linePath} fill="none" stroke={GA_BLUE} strokeWidth="2" strokeLinejoin="round" />
+                {week.map((d, i) => (
+                  <g key={d.date} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)}>
+                    <rect x={x(i) - plotW / 14} y={PAD.t} width={plotW / 7} height={plotH} fill="transparent" />
+                    <circle cx={x(i)} cy={y(d.visitors)} r={hover === i ? 5 : 3.5} fill="#fff" stroke={GA_BLUE} strokeWidth="2" />
+                    <text x={x(i)} y={H - 8} textAnchor="middle" fontSize="11" fill={MUTED}>{d.day}</text>
+                  </g>
+                ))}
+              </svg>
+              {hover !== null && (
+                <div
+                  className="pointer-events-none absolute top-0 rounded border bg-white px-3 py-1.5 text-xs shadow-sm"
+                  style={{ left: `${(x(hover) / W) * 100}%`, transform: 'translateX(-50%)', borderColor: BORDER }}
+                >
+                  <span style={{ color: MUTED }}>{week[hover].date}</span>
+                  <span className="ml-2 font-medium" style={{ color: INK }}>
+                    {week[hover].visitors} user{week[hover].visitors === 1 ? '' : 's'}
+                  </span>
+                </div>
+              )}
+            </div>
+          </Card>
+
+          <Card title="Users in last 30 minutes">
+            <p className="mt-2 text-[34px] leading-none tabular-nums" style={{ color: INK }}>0</p>
+            <p className="mt-2 text-xs" style={{ color: MUTED }}>Users per minute</p>
+            <div className="mt-1.5 flex h-8 items-end gap-[3px]">
+              {Array.from({ length: 30 }).map((_, i) => (
+                <span key={i} className="w-full rounded-sm" style={{ height: 2, background: GRID }} />
+              ))}
+            </div>
+            <p className="mt-4 text-xs" style={{ color: MUTED }}>Top country</p>
+            <p className="mt-1 text-[13px]" style={{ color: INK }}>—</p>
+          </Card>
         </div>
 
-        {/* Pages + sources */}
-        <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-ink-100 bg-white p-6 shadow-sm">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-ink-700">Top pages</h2>
-            <ul className="mt-5 space-y-3.5">
-              {topPages.map((p) => (
-                <HBar key={p.path} label={p.path} value={p.views} max={maxPage} />
-              ))}
+        {/* Ranked lists */}
+        <div className="mt-4 grid gap-4 lg:grid-cols-2">
+          <Card title="Pages and screens" right={<span className="text-xs" style={{ color: MUTED }}>Views</span>}>
+            <ul className="mt-2">
+              {topPages.map((p) => <RankRow key={p.path} label={p.path} value={p.views} max={maxPage} />)}
             </ul>
-            <p className="mt-4 text-right text-xs text-ink-400">page views</p>
-          </div>
-          <div className="rounded-2xl border border-ink-100 bg-white p-6 shadow-sm">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-ink-700">Traffic sources</h2>
-            <ul className="mt-5 space-y-3.5">
-              {sources.map((s) => (
-                <HBar key={s.name} label={s.name} value={s.visitors} max={maxSrc} />
-              ))}
+          </Card>
+          <Card title="Traffic acquisition" right={<span className="text-xs" style={{ color: MUTED }}>Users</span>}>
+            <ul className="mt-2">
+              {sources.map((s) => <RankRow key={s.name} label={s.name} value={s.visitors} max={maxSrc} />)}
             </ul>
-            <p className="mt-4 text-right text-xs text-ink-400">visitors</p>
-          </div>
+          </Card>
         </div>
 
-        {/* Devices + countries */}
-        <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-ink-100 bg-white p-6 shadow-sm">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-ink-700">Devices</h2>
-            <ul className="mt-5 space-y-3.5">
-              {devices.map((d) => (
-                <HBar key={d.name} label={d.name} value={d.visitors} max={devices[0].visitors} />
-              ))}
+        <div className="mt-4 grid gap-4 lg:grid-cols-2">
+          <Card title="Users by country" right={<span className="text-xs" style={{ color: MUTED }}>Users</span>}>
+            <ul className="mt-2">
+              {countries.map((c) => <RankRow key={c.name} label={c.name} value={c.visitors} max={countries[0].visitors} />)}
             </ul>
-          </div>
-          <div className="rounded-2xl border border-ink-100 bg-white p-6 shadow-sm">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-ink-700">Countries</h2>
-            <ul className="mt-5 space-y-3.5">
-              {countries.map((c) => (
-                <HBar key={c.name} label={c.name} value={c.visitors} max={countries[0].visitors} />
-              ))}
+          </Card>
+          <Card title="Users by device" right={<span className="text-xs" style={{ color: MUTED }}>Users</span>}>
+            <ul className="mt-2">
+              {devices.map((d) => <RankRow key={d.name} label={d.name} value={d.visitors} max={devices[0].visitors} />)}
             </ul>
-          </div>
+          </Card>
         </div>
 
-        <p className="mt-8 text-center text-xs text-ink-400">
+        <p className="mt-8 text-center text-xs" style={{ color: MUTED }}>
           Reporting period Jul 12 – Jul 18 · Preview build, sample period
         </p>
       </div>
