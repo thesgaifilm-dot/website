@@ -9,6 +9,7 @@ import Services from './pages/Services'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import ConsultingSuite from './pages/ConsultingSuite'
+import SiteAnalytics from './pages/SiteAnalytics'
 
 export default function App() {
   const location = useLocation()
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           {/* Unlisted: direct link only, noindex; not in nav or footer */}
           <Route path="/consulting-suite-mq7x" element={<ConsultingSuite />} />
+          <Route path="/site-analytics-k4n8" element={<SiteAnalytics />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </main>
