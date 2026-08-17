@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Services from './pages/Services'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import ConsultingSuite from './pages/ConsultingSuite'
 
 export default function App() {
   const location = useLocation()
@@ -38,6 +39,8 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          {/* Unlisted — direct link only, noindex; not in nav or footer */}
+          <Route path="/consulting-suite-mq7x" element={<ConsultingSuite />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </main>
