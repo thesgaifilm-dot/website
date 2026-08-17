@@ -1,7 +1,7 @@
 import SectionHeading from '../components/SectionHeading'
+import ClientsWall from '../components/ClientsWall'
 import CTASection from '../components/CTASection'
 import StatsStrip from '../components/StatsStrip'
-import PartnersCarousel from '../components/PartnersCarousel'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import { caseStudies } from '../data/caseStudies'
@@ -77,7 +77,6 @@ export default function About() {
 
       <StatsStrip />
 
-      <PartnersCarousel />
 
       {/* Case studies */}
       <section id="case-studies" className="scroll-mt-24 bg-ink-50">
@@ -128,6 +127,9 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {/* Client logo wall — every brand on an identical white tile */}
+      <ClientsWall />
 
       <CTASection title="Let's talk about your growth plans" />
     </>

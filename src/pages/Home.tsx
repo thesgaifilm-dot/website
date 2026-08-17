@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import StatsStrip from '../components/StatsStrip'
+import PartnersCarousel from '../components/PartnersCarousel'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import Typewriter from '../components/Typewriter'
@@ -79,6 +80,9 @@ export default function Home() {
       </section>
 
       <StatsStrip />
+
+      {/* Strategic partners — moved here from About; clients wall lives there now */}
+      <PartnersCarousel />
 
       {/* Services overview */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">

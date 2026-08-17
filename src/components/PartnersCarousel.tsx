@@ -15,6 +15,8 @@ const rowB = [
   { file: 'guangxi-commerce.png', name: 'Guangxi Commerce & Trade Group' },
   { file: 'yunde.png', name: 'Yunde Group' },
   { file: 'huafu-dreamworks.png', name: 'Huafu Dreamworks' },
+  { file: 'bee-rev.png', name: 'Bee' },
+  { file: 'cp-fergus.jpg', name: 'CP Fergus' },
 ]
 
 function MarqueeRow({ items, reverse = false }: { items: typeof rowA; reverse?: boolean }) {

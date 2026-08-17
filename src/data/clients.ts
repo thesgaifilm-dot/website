@@ -1,0 +1,66 @@
+/**
+ * Client logo wall — generated from the /Clients folder drop.
+ * Files live in public/media/clients (normalised names).
+ */
+
+export interface ClientLogo {
+  file: string
+  name: string
+}
+
+export const clients: ClientLogo[] = [
+  { file: 'aegis.png', name: "Aegis" },
+  { file: 'aia.jpg', name: "AIA" },
+  { file: 'bloom-balance.jpg', name: "BLOOM & BALANCE" },
+  { file: 'blooming-the-nail-lounge.jpg', name: "BLOOMING THE NAIL LOUNGE" },
+  { file: 'bull-international.png', name: "Bull International" },
+  { file: 'ceni-bar.png', name: "Ceni Bar" },
+  { file: 'chagee.jpg', name: "Chagee" },
+  { file: 'chun-hua-nai-nai.jpg', name: "Chun Hua Nai Nai" },
+  { file: 'clingsg-pte-ltd.jpg', name: "ClingSG Pte Ltd" },
+  { file: 'cumulo-kidz-pte-ltd.jpg', name: "CUMULO KIDZ PTE LTD" },
+  { file: 'direct-to-masses.jpg', name: "Direct to Masses" },
+  { file: 'dressapet-pte-ltd.jpg', name: "Dressapet pte ltd" },
+  { file: 'echarge.png', name: "Echarge" },
+  { file: 'fishsonice.jpg', name: "FISHSONICE" },
+  { file: 'goodcentury-company-pte-ltd.png', name: "GOODCENTURY COMPANY PTE. LTD" },
+  { file: 'h-cube.png', name: "H Cube" },
+  { file: 'hive-connection.png', name: "Hive Connection" },
+  { file: 'huttons.png', name: "Huttons" },
+  { file: 'ikigai-medical-clinic.jpg', name: "Ikigai Medical Clinic" },
+  { file: 'im-qalb-logo.jpg', name: "IM QALB LOGO" },
+  { file: 'imjai-logo.png', name: "Imjai" },
+  { file: 'instance-cloud-technology.png', name: "Instance Cloud Technology" },
+  { file: 'invictus-auto.png', name: "Invictus Auto" },
+  { file: 'invictus-auto-wrap.jpg', name: "Invictus Auto wrap" },
+  { file: 'katrina-group.jpg', name: "Katrina Group" },
+  { file: 'kreative-beaulab.jpg', name: "Kreative Beaulab" },
+  { file: 'krypton-lite-pte-ltd.jpg', name: "KRYPTON LITE PTE. LTD" },
+  { file: 'legacy-seafood.jpg', name: "Legacy Seafood" },
+  { file: 'loan-supermart.png', name: "LOAN SUPERMART" },
+  { file: 'luxura-interior-design.jpg', name: "LUXURA INTERIOR DESIGN" },
+  { file: 'manulife.png', name: "Manulife" },
+  { file: 'method-and-madness.jpg', name: "Method and Madness" },
+  { file: 'method-collective-pte-ltd.png', name: "METHOD COLLECTIVE PTE LTD" },
+  { file: 'philore-group-pte-ltd.avif', name: "PHILORE Group Pte. Ltd" },
+  { file: 'prudential.png', name: "Prudential" },
+  { file: 'royal-smile.jpg', name: "Royal-smile" },
+  { file: 's-plus-beauty.png', name: "S Plus Beauty" },
+  { file: 'sf-construction.webp', name: "SF CONSTRUCTION" },
+  { file: 'spring-roll-station-pte-ltd.jpg', name: "Spring ROLL STATION PTE. LTD" },
+  { file: 'sta-engineering.png', name: "STA Engineering" },
+  { file: 'swee-hock.png', name: "Swee Hock" },
+  { file: 'teledata-technologies-pte-ltd.png', name: "TELEDATA TECHNOLOGIES PTE. LTD" },
+  { file: 'the-wunderfood-co-pte-ltd.jpg', name: "THE WUNDERFOOD CO PTE LTD" },
+  { file: 'timeless-tomato-logo.png', name: "Timeless Tomato" },
+  { file: 'tnp-wellness-pte-ltd.jpg', name: "TNP WELLNESS PTE LTD" },
+  { file: 'toptable.webp', name: "Toptable" },
+  { file: 'trendwood.jpg', name: "TRENDWOOD" },
+  { file: 'trustpal-logo.jpg', name: "Trustpal" },
+  { file: 'unique-technologies-pte-ltd.jpg', name: "UNIQUE TECHNOLOGIES PTE. LTD" },
+  { file: 'verde-light.jpg', name: "Verde Light" },
+  { file: 'visionary-interior-design-pte-ltd.jpg', name: "VISIONARY INTERIOR DESIGN PTE. LTD" },
+  { file: 'wecofa.webp', name: "Wecofa" },
+  { file: 'wellnergie-logo.jpg', name: "Wellnergie" },
+  { file: 'xeq-capital.jpg', name: "XEQ Capital" },
+]
