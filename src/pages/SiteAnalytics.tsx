@@ -32,7 +32,7 @@ const topPages = [
   { path: '/about', views: 9 },
   { path: '/services', views: 8 },
   { path: '/contact', views: 5 },
-  { path: '/consulting-suite-mq7x', views: 3 },
+  { path: '/work', views: 3 },
 ]
 
 const sources = [
@@ -123,7 +123,7 @@ export default function SiteAnalytics() {
           </span>
           <span className="text-[22px]" style={{ color: MUTED }}>Analytics</span>
           <span className="hidden items-center gap-2 rounded px-3 py-1.5 text-sm sm:flex" style={{ color: INK }}>
-            missniu.com
+            catalystviral.com
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill={MUTED}><path d="M7 10l5 5 5-5z" /></svg>
           </span>
           <div className="ml-auto flex items-center gap-3">
@@ -135,7 +135,7 @@ export default function SiteAnalytics() {
               style={{ background: GA_BLUE }}
               aria-hidden="true"
             >
-              M
+              C
             </span>
           </div>
         </div>
