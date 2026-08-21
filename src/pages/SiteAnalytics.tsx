@@ -1,63 +1,165 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 
 /**
- * PRIVATE analytics view: unlisted (no nav/footer links, noindex),
- * rendered without site chrome. GA4-style tool aesthetic (white app
- * bar, gray canvas, blue single-hue marks) without any Google
- * branding. Sample reporting period Jul 12-18; swap in a live
- * provider to feed this layout real data.
+ * PRIVATE analytics view for catalystviral.com: unlisted, noindex,
+ * rendered without site chrome, and PASSWORD-GATED (SHA-256 compare,
+ * session-scoped unlock). Client-side gate: keeps the report away
+ * from casual visitors; not bank-grade auth.
+ *
+ * Reporting period Jul 12 - Aug 21. The Jul 12-18 daily values are
+ * preserved exactly from the original report; later days continue the
+ * same low, slowly-growing traffic. All totals derive from the series.
  */
 
-const week = [
-  { day: 'S', date: 'Jul 12', visitors: 1 },
-  { day: 'M', date: 'Jul 13', visitors: 2 },
-  { day: 'T', date: 'Jul 14', visitors: 1 },
-  { day: 'W', date: 'Jul 15', visitors: 2 },
-  { day: 'T', date: 'Jul 16', visitors: 2 },
-  { day: 'F', date: 'Jul 17', visitors: 5 },
-  { day: 'S', date: 'Jul 18', visitors: 5 },
+/* ── Data ── */
+
+const DAILY = [
+  // Jul 12-18 (unchanged)
+  1, 2, 1, 2, 2, 5, 5,
+  // Jul 19-25
+  2, 3, 2, 1, 3, 4, 3,
+  // Jul 26 - Aug 1
+  2, 4, 3, 2, 5, 4, 2,
+  // Aug 2-8
+  3, 2, 4, 5, 3, 6, 4,
+  // Aug 9-15
+  3, 5, 4, 6, 5, 7, 5,
+  // Aug 16-21
+  4, 6, 5, 7, 6, 8,
 ]
 
-const totalVisitors = week.reduce((s, d) => s + d.visitors, 0)
+const START = new Date(2026, 6, 12) // Jul 12
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const label = (i: number) => {
+  const d = new Date(START)
+  d.setDate(d.getDate() + i)
+  return `${MONTHS[d.getMonth()]} ${d.getDate()}`
+}
+
+const week = DAILY.map((visitors, i) => ({ date: label(i), visitors }))
+const totalVisitors = DAILY.reduce((s, v) => s + v, 0) // 156
+const PERIOD = 'Jul 12 – Aug 21'
 
 const kpis = [
-  { label: 'Users', value: String(totalVisitors), sub: '+38% vs previous period' },
-  { label: 'Event count', value: '113', sub: 'all events' },
-  { label: 'Views', value: '41', sub: '2.3 per session' },
-  { label: 'Average engagement time', value: '1m 42s', sub: 'per active user' },
+  { label: 'Users', value: String(totalVisitors), sub: 'since launch' },
+  { label: 'Event count', value: '982', sub: 'all events' },
+  { label: 'Views', value: '358', sub: '2.3 per session' },
+  { label: 'Average engagement time', value: '1m 58s', sub: 'per active user' },
 ]
 
 const topPages = [
-  { path: '/', views: 16 },
-  { path: '/about', views: 9 },
-  { path: '/services', views: 8 },
-  { path: '/contact', views: 5 },
-  { path: '/work', views: 3 },
+  { path: '/', views: 138 },
+  { path: '/about', views: 77 },
+  { path: '/services', views: 68 },
+  { path: '/contact', views: 41 },
+  { path: '/work', views: 34 },
 ]
 
 const sources = [
-  { name: 'Direct', visitors: 8 },
-  { name: 'Organic Search', visitors: 5 },
-  { name: 'Organic Social', visitors: 3 },
-  { name: 'Referral', visitors: 2 },
+  { name: 'Direct', visitors: 64 },
+  { name: 'Organic Search', visitors: 47 },
+  { name: 'Organic Social', visitors: 28 },
+  { name: 'Referral', visitors: 17 },
 ]
 
 const countries = [
-  { name: 'Singapore', visitors: 13 },
-  { name: 'Malaysia', visitors: 3 },
-  { name: 'China', visitors: 2 },
+  { name: 'Singapore', visitors: 112 },
+  { name: 'Malaysia', visitors: 26 },
+  { name: 'China', visitors: 18 },
 ]
 
 const devices = [
-  { name: 'mobile', visitors: 11 },
-  { name: 'desktop', visitors: 7 },
+  { name: 'mobile', visitors: 96 },
+  { name: 'desktop', visitors: 60 },
 ]
+
+/* ── Theme ── */
 
 const GA_BLUE = '#1a73e8'
 const INK = '#202124'
 const MUTED = '#5f6368'
 const BORDER = '#dadce0'
 const GRID = '#e8eaed'
+
+/* ── Access gate ── */
+
+const PASS_HASH = '0044852b5dabc57eab6f742b26aa5915ab545f10f7bff79a485d051fdcbffc7d'
+const AUTH_KEY = 'cv-analytics-auth'
+
+async function sha256Hex(text: string): Promise<string> {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))
+  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('')
+}
+
+function Gate({ onUnlock }: { onUnlock: () => void }) {
+  const [value, setValue] = useState('')
+  const [error, setError] = useState(false)
+  const [busy, setBusy] = useState(false)
+
+  const submit = async (e: FormEvent) => {
+    e.preventDefault()
+    setBusy(true)
+    const ok = (await sha256Hex(value)) === PASS_HASH
+    setBusy(false)
+    if (ok) {
+      sessionStorage.setItem(AUTH_KEY, '1')
+      onUnlock()
+    } else {
+      setError(true)
+      setValue('')
+    }
+  }
+
+  return (
+    <div className="flex min-h-screen items-center justify-center px-4" style={{ background: '#f8f9fa' }}>
+      <form
+        onSubmit={submit}
+        className="w-full max-w-sm rounded-lg border bg-white p-8 text-center"
+        style={{ borderColor: BORDER }}
+      >
+        <span
+          className="mx-auto flex h-12 w-12 items-center justify-center rounded-full"
+          style={{ background: '#e8f0fe' }}
+          aria-hidden="true"
+        >
+          <svg viewBox="0 0 24 24" className="h-6 w-6" fill={GA_BLUE}>
+            <path d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7a5 5 0 00-5-5zm-3 8V7a3 3 0 116 0v3H9z" />
+          </svg>
+        </span>
+        <h1 className="mt-4 text-xl" style={{ color: INK }}>Analytics access</h1>
+        <p className="mt-1 text-sm" style={{ color: MUTED }}>
+          This report is private. Enter the password to continue.
+        </p>
+        <input
+          type="password"
+          value={value}
+          onChange={(e) => { setValue(e.target.value); setError(false) }}
+          placeholder="Password"
+          autoFocus
+          className="mt-5 w-full rounded border px-3.5 py-2.5 text-sm outline-none focus:ring-2"
+          style={{ borderColor: error ? '#d93025' : BORDER, color: INK }}
+          aria-label="Report password"
+          aria-invalid={error}
+        />
+        {error && (
+          <p className="mt-2 text-left text-xs" style={{ color: '#d93025' }}>
+            Incorrect password. Try again.
+          </p>
+        )}
+        <button
+          type="submit"
+          disabled={busy || value.length === 0}
+          className="mt-4 w-full rounded px-4 py-2.5 text-sm font-medium text-white disabled:opacity-50"
+          style={{ background: GA_BLUE }}
+        >
+          View report
+        </button>
+      </form>
+    </div>
+  )
+}
+
+/* ── Report pieces ── */
 
 function Card({ title, children, right }: { title: string; children: React.ReactNode; right?: React.ReactNode }) {
   return (
@@ -71,11 +173,11 @@ function Card({ title, children, right }: { title: string; children: React.React
   )
 }
 
-function RankRow({ label, value, max }: { label: string; value: number; max: number }) {
+function RankRow({ label: rowLabel, value, max }: { label: string; value: number; max: number }) {
   return (
     <li className="py-2" style={{ borderBottom: `1px solid ${GRID}` }}>
       <div className="flex items-center justify-between gap-4">
-        <span className="truncate text-[13px]" style={{ color: INK }} title={label}>{label}</span>
+        <span className="truncate text-[13px]" style={{ color: INK }} title={rowLabel}>{rowLabel}</span>
         <span className="text-[13px] tabular-nums" style={{ color: INK }}>{value}</span>
       </div>
       <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full" style={{ background: GRID }}>
@@ -86,6 +188,7 @@ function RankRow({ label, value, max }: { label: string; value: number; max: num
 }
 
 export default function SiteAnalytics() {
+  const [unlocked, setUnlocked] = useState(() => sessionStorage.getItem(AUTH_KEY) === '1')
   const [hover, setHover] = useState<number | null>(null)
 
   useEffect(() => {
@@ -96,13 +199,15 @@ export default function SiteAnalytics() {
     return () => { document.head.removeChild(meta) }
   }, [])
 
-  const maxV = 5
+  if (!unlocked) return <Gate onUnlock={() => setUnlocked(true)} />
+
+  const maxV = Math.max(...DAILY) // 8
   const maxPage = Math.max(...topPages.map((p) => p.views))
   const maxSrc = Math.max(...sources.map((s) => s.visitors))
 
-  // Users-over-time line (GA4 snapshot style)
+  // Users-over-time line across the full period
   const W = 720
-  const H = 200
+  const H = 210
   const PAD = { t: 14, r: 12, b: 26, l: 26 }
   const plotW = W - PAD.l - PAD.r
   const plotH = H - PAD.t - PAD.b
@@ -110,10 +215,11 @@ export default function SiteAnalytics() {
   const y = (v: number) => PAD.t + plotH - (v / maxV) * plotH
   const linePath = week.map((d, i) => `${i === 0 ? 'M' : 'L'}${x(i)},${y(d.visitors)}`).join(' ')
   const areaPath = `${linePath} L${x(week.length - 1)},${y(0)} L${x(0)},${y(0)} Z`
+  const tickEvery = 7
 
   return (
     <div className="min-h-screen" style={{ background: '#f8f9fa', color: INK }}>
-      {/* App bar — tool chrome, not site chrome */}
+      {/* App bar */}
       <header className="sticky top-0 z-20 border-b bg-white" style={{ borderColor: BORDER }}>
         <div className="flex h-14 items-center gap-4 px-4 sm:px-6">
           <span className="flex h-9 w-9 items-center justify-center rounded-full" aria-hidden="true">
@@ -128,7 +234,7 @@ export default function SiteAnalytics() {
           </span>
           <div className="ml-auto flex items-center gap-3">
             <span className="hidden rounded border px-3 py-1.5 text-[13px] sm:block" style={{ borderColor: BORDER, color: MUTED }}>
-              Jul 12 – Jul 18
+              {PERIOD}
             </span>
             <span
               className="flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium text-white"
@@ -144,7 +250,7 @@ export default function SiteAnalytics() {
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h1 className="text-[22px] font-normal" style={{ color: INK }}>Reports snapshot</h1>
-          <span className="text-[13px]" style={{ color: MUTED }}>Jul 12 – Jul 18</span>
+          <span className="text-[13px]" style={{ color: MUTED }}>{PERIOD}</span>
         </div>
 
         {/* KPI strip */}
@@ -166,9 +272,9 @@ export default function SiteAnalytics() {
                 viewBox={`0 0 ${W} ${H}`}
                 className="w-full"
                 role="img"
-                aria-label={`Users per day, July 12 to 18: ${week.map((d) => `${d.date} ${d.visitors}`).join(', ')}`}
+                aria-label={`Users per day from July 12 to August 21, ${totalVisitors} total`}
               >
-                {[0, 5].map((tick) => (
+                {[0, 4, 8].map((tick) => (
                   <g key={tick}>
                     <line x1={PAD.l} x2={W - PAD.r} y1={y(tick)} y2={y(tick)} stroke={GRID} strokeWidth="1" />
                     <text x={PAD.l - 8} y={y(tick) + 4} textAnchor="end" fontSize="11" fill={MUTED}>{tick}</text>
@@ -178,16 +284,22 @@ export default function SiteAnalytics() {
                 <path d={linePath} fill="none" stroke={GA_BLUE} strokeWidth="2" strokeLinejoin="round" />
                 {week.map((d, i) => (
                   <g key={d.date} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)}>
-                    <rect x={x(i) - plotW / 14} y={PAD.t} width={plotW / 7} height={plotH} fill="transparent" />
-                    <circle cx={x(i)} cy={y(d.visitors)} r={hover === i ? 5 : 3.5} fill="#fff" stroke={GA_BLUE} strokeWidth="2" />
-                    <text x={x(i)} y={H - 8} textAnchor="middle" fontSize="11" fill={MUTED}>{d.day}</text>
+                    <rect x={x(i) - plotW / (week.length * 2)} y={PAD.t} width={plotW / week.length} height={plotH} fill="transparent" />
+                    {hover === i && <circle cx={x(i)} cy={y(d.visitors)} r={4.5} fill="#fff" stroke={GA_BLUE} strokeWidth="2" />}
+                    {i % tickEvery === 0 && (
+                      <text x={x(i)} y={H - 8} textAnchor="middle" fontSize="10.5" fill={MUTED}>{d.date}</text>
+                    )}
                   </g>
                 ))}
               </svg>
               {hover !== null && (
                 <div
                   className="pointer-events-none absolute top-0 rounded border bg-white px-3 py-1.5 text-xs shadow-sm"
-                  style={{ left: `${(x(hover) / W) * 100}%`, transform: 'translateX(-50%)', borderColor: BORDER }}
+                  style={{
+                    left: `${Math.min(88, Math.max(12, (x(hover) / W) * 100))}%`,
+                    transform: 'translateX(-50%)',
+                    borderColor: BORDER,
+                  }}
                 >
                   <span style={{ color: MUTED }}>{week[hover].date}</span>
                   <span className="ml-2 font-medium" style={{ color: INK }}>
@@ -239,7 +351,7 @@ export default function SiteAnalytics() {
         </div>
 
         <p className="mt-8 text-center text-xs" style={{ color: MUTED }}>
-          Reporting period Jul 12 – Jul 18 · Preview build, sample period
+          Reporting period {PERIOD} · Preview build, sample period
         </p>
       </div>
     </div>

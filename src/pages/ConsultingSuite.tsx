@@ -1,13 +1,11 @@
-import { useEffect } from 'react'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 
 /**
- * PRIVATE consulting checkout: deliberately unlisted (no nav/footer
- * links, noindex). Each service checks out through a Stripe-hosted
- * Payment Link: card details never touch this site, and no secret
- * keys live in this codebase.
+ * Consulting checkout, linked from the header. Each service checks
+ * out through a Stripe-hosted Payment Link: card details never touch
+ * this site, and no secret keys live in this codebase.
  */
 
 const services = [
@@ -41,15 +39,6 @@ const services = [
 ]
 
 export default function ConsultingSuite() {
-  // Unlisted: keep search engines out.
-  useEffect(() => {
-    const meta = document.createElement('meta')
-    meta.name = 'robots'
-    meta.content = 'noindex, nofollow'
-    document.head.appendChild(meta)
-    return () => { document.head.removeChild(meta) }
-  }, [])
-
   return (
     <>
       <PageHero

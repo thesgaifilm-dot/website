@@ -5,6 +5,7 @@ import Logo from './Logo'
 const links = [
   { to: '/', label: 'Home' },
   { to: '/services', label: 'Services' },
+  { to: '/consulting-suite-mq7x', label: 'Book Consulting' },
   { to: '/about', label: 'About Us' },
   { to: '/contact', label: 'Contact' },
 ]
