@@ -43,8 +43,9 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          {/* Unlisted: direct link only, noindex; not in nav or footer */}
+          {/* Linked from the navbar and listed in the sitemap */}
           <Route path="/consulting-suite-mq7x" element={<ConsultingSuite />} />
+          {/* Unlisted: direct link only, noindex; not in nav, footer or sitemap */}
           <Route path="/site-analytics-k4n8" element={<SiteAnalytics />} />
           <Route path="*" element={<Home />} />
         </Routes>
