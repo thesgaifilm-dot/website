@@ -10,6 +10,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import ConsultingSuite from './pages/ConsultingSuite'
 import SiteAnalytics from './pages/SiteAnalytics'
+import { pageMeta, defaultMeta } from './data/seo'
 
 export default function App() {
   const location = useLocation()
@@ -29,6 +30,17 @@ export default function App() {
       clearTimeout(remove)
     }
   }, [])
+
+  // Keep the document title and description in step with the route on
+  // client-side navigation (the prerendered HTML already carries the
+  // right values on first load).
+  useEffect(() => {
+    const meta = pageMeta[location.pathname] ?? defaultMeta
+    document.title = meta.title
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute('content', meta.description)
+  }, [location.pathname])
 
   // The analytics page is a standalone tool view: no site chrome.
   const bare = location.pathname === '/site-analytics-k4n8'
