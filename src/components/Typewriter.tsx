@@ -17,18 +17,20 @@ export default function Typewriter({
   onDone?: () => void
 }) {
   const total = segments.reduce((n, s) => n + s.text.length, 0)
-  const [count, setCount] = useState(0)
+  // Start fully typed so prerendered HTML (and the hydration pass) carries
+  // the complete heading; the effect below rewinds and animates on mount.
+  const [count, setCount] = useState(total)
   const notified = useRef(false)
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setCount(total)
       if (!notified.current) {
         notified.current = true
         onDone?.()
       }
       return
     }
+    setCount(0)
     let interval: ReturnType<typeof setInterval> | undefined
     const start = setTimeout(() => {
       let i = 0
