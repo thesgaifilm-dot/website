@@ -1,3 +1,18 @@
+const membershipGroups = [
+  {
+    name: "SBF Singapore Union",
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/SBF%20Singapore%20Union-yHyvbP3Og5kHQ7mdVVnVK2Zq55kLXp.png",
+  },
+  {
+    name: "ASME Singapore Union",
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ASME%20Singapore%20Union-wmG6UpgszeFAbK9ye8jsmgd2pV3uN7.jpeg",
+  },
+  {
+    name: "BNI Singapore Networking Union",
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/BNI%20Singapore%20Networking%20Union-uTPlN91zMvkFTFBVMGu7PjU712z9GK.png",
+  },
+]
+
 export default function BusinessNetworksSection() {
   return (
     <section aria-labelledby="business-networks-title" className="bg-ink-50">
@@ -17,6 +32,24 @@ export default function BusinessNetworksSection() {
             We&apos;re proud to be members of business groups in Singapore.
           </p>
         </div>
+      </div>
+      <div className="mx-auto mt-10 grid max-w-6xl gap-4 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-3">
+        {membershipGroups.map((group) => (
+          <figure key={group.name} className="rounded-2xl border border-ink-100 bg-white shadow-sm">
+            <div className="flex h-36 items-center justify-center p-6">
+              <img
+                src={group.src}
+                alt=""
+                className="max-h-24 max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption className="border-t border-ink-100 px-4 py-3 text-center text-sm font-semibold text-ink-700">
+              {group.name}
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </section>
   )
