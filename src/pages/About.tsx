@@ -9,29 +9,24 @@ import { caseStudies } from '../data/caseStudies'
 
 const timeline = [
   {
-    year: '2014–2020',
-    title: 'Republic of Singapore Navy',
-    body: 'Six years as a regular; top of his cohort. Took part in RIMPAC in Pearl Harbour, the world\'s largest maritime exercise, and operations across Thailand, India, China and Japan. Declined a military scholarship to pursue entrepreneurship.',
+    year: 'Since 2019',
+    title: 'Cross-border business development',
+    body: 'Bryan built experience supporting companies with regional business development, sourcing and market relationships across Singapore and Asia.',
   },
   {
-    year: '2020',
-    title: 'Founded Emptyspace during COVID-19',
-    body: 'Started a sales and marketing agency from zero in the middle of the pandemic, cold calling for the first clients, and grew it to a team of fifteen.',
-  },
-  {
-    year: '2022',
-    title: 'National media recognition',
-    body: 'Featured on CNA/TODAY ("On the Talent Hunt") and Channel 8 for pioneering Workforce Singapore\'s Career Trial programme, hiring and training candidates from non-traditional backgrounds.',
+    year: '2025',
+    title: 'Founded Miss Niu Tech in Singapore',
+    body: 'Established Miss Niu Technology Pte Ltd to bring advisory, partner coordination and technology delivery together for growing businesses.',
   },
   {
     year: '2025–2026',
-    title: 'AI immersion in China',
-    body: 'Spent a year in Jinhua, China studying the AI ecosystem first-hand, building relationships with developers and technology companies, then brought those tools back to Singapore and Malaysia.',
+    title: 'On-ground work in China',
+    body: 'Spent an extended period in Jinhua, China, building practical relationships across the regional technology and business ecosystem.',
   },
   {
     year: 'Today',
-    title: 'Leading Miss Niu',
-    body: 'Leads four AI development teams of close to 100 people across China, India, Malaysia and Singapore, alongside Miss Niu\'s cross-border and workforce advisory practice.',
+    title: 'Advisory for the next stage of growth',
+    body: 'Leads a model that connects compliance guidance, financing support, market access and technology delivery through Miss Niu teams and vetted specialists.',
   },
 ]
 
@@ -42,7 +37,7 @@ export default function About() {
     <>
       <PageHero
         title="About Us"
-        subtitle="A growth architecture firm, built the hard way"
+        subtitle="Founder-led cross-border advisory for growth across Asia"
         image="/media/hero-about.jpg"
       />
 
@@ -51,9 +46,9 @@ export default function About() {
         <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr]">
           <div>
             <SectionHeading
-              eyebrow="Founder & CEO"
-              title="Mr Bryan Ng (Huang Keqin)"
-              body="Military discipline, pandemic era entrepreneurship and a year inside China's AI ecosystem shaped how Miss Niu executes today."
+              eyebrow="Founder & Director"
+              title="Bryan Ng"
+              body="A cross-border operator since 2019, Bryan combines regional business development experience with a practical network across Singapore and China."
             />
             <Reveal delay={140} className="mt-8"><div className="rounded-2xl bg-coral-50 p-6">
               <p className="text-sm font-bold uppercase tracking-wider text-coral-600">{t('As featured on')}</p>

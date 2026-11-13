@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import SectionHeading from '../components/SectionHeading'
 import CTASection from '../components/CTASection'
 import PageHero from '../components/PageHero'
@@ -12,41 +13,48 @@ export default function Services() {
     <>
       <PageHero
         title="Services"
-        subtitle="Strategy, people and technology under one roof"
+        subtitle="Compliance advisory, funding guidance and in-house technology for cross-border growth."
         image="/media/hero-services.jpg"
       />
 
       {/* Overseas Development Consultation */}
-      <section id="overseas" className="scroll-mt-24">
+      <section id="compliance" className="scroll-mt-24">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading
-            eyebrow="01 · Overseas Development Consultation"
-            title="Expand into Asia with people already on the ground"
-            body="We maintain our own staffed offices in China and Malaysia and live working partners across seven more Asian markets. Incorporation, licensing, market representative agreements and regulatory filings are handled by our own people, never passed to strangers."
+            eyebrow="01 · Compliance Advisory"
+            title="One advisor. A coordinated compliance stack."
+            body="Miss Niu Tech acts as your central advisor, mapping requirements and coordinating vetted specialists for cross-border setup and expansion. We help keep the people, paperwork and next steps connected."
           />
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {[
               {
-                t: 'Market entry & presence',
-                d: 'Market research and investor profiling, overseas incorporation, licences and permits, IP and trademark registration, and legal entity structuring.',
+                t: 'Immigration & workforce',
+                d: 'Partner-led immigration casework and workforce coordination for founders, employees and families expanding into new markets.',
               },
               {
-                t: 'Governance & compliance',
-                d: 'Cross-border governance models, data protection compliance across jurisdictions, transfer pricing documentation and tax-efficient structuring.',
+                t: 'Corporate secretarial & legal',
+                d: 'Vetted providers deliver regulated corporate-secretarial and legal work; we coordinate requirements, milestones and communication.',
               },
               {
-                t: 'Business development',
-                d: 'Curated investor and buyer matching, in-market representation, supply chain coordination and ongoing relationship management.',
+                t: 'Relocation, accommodation & education',
+                d: 'Coordinate practical settling-in options for business owners, employees and families, based on location and provider availability.',
+              },
+              {
+                t: 'Market entry & governance',
+                d: 'Map cross-border setup, local requirements, governance and operating dependencies across Singapore, China and Malaysia.',
               },
             ].map((x, i) => (
               <Reveal key={x.t} delay={i * 100} className="h-full">
                 <div className="h-full rounded-2xl border border-ink-100 p-7">
-                  <h3 className="font-bold text-ink-900">{x.t}</h3>
+                  <h3 className="font-bold text-ink-900">{t(x.t)}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-600">{t(x.d)}</p>
                 </div>
               </Reveal>
             ))}
           </div>
+          <p className="mt-8 rounded-xl border border-coral-200 bg-coral-50 p-4 text-sm leading-relaxed text-ink-700">
+            {t('Miss Niu Tech provides advisory and coordination. Services requiring professional licensing or registration are performed by the relevant qualified partner provider.')}
+          </p>
           <Reveal delay={150} className="mt-8">
             <div className="flex flex-wrap gap-2">
               {[...footprint.ownOffices, ...footprint.partnerMarkets].map((m) => (
@@ -59,76 +67,82 @@ export default function Services() {
         </div>
       </section>
 
-      {/* HR & Workforce Consultancy */}
-      <section id="hr" className="scroll-mt-24 bg-ink-50">
+      {/* Funding and SME financing */}
+      <section id="funding" className="scroll-mt-24 bg-ink-50">
         <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2">
           <SectionHeading
-            eyebrow="02 · HR & Workforce Consultancy"
-            title="Build high-performing teams, fast"
-            body="Our founder has built teams of 40, 60 and 80 people in four to six months, repeatedly and across industries. We bring that playbook to your organisation: recruitment engines, structured onboarding, workforce development and retention strategies that hold up under rapid growth."
+            eyebrow="02 · Funding & SME Financing"
+            title="Make funding fit the growth plan."
+            body="We help Singapore SMEs understand relevant grant and financing routes, prepare for lender or programme review, and make informed comparisons. Eligibility and approval remain with the relevant agencies and lenders."
           />
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               {
-                t: 'Talent acquisition',
-                d: 'Recruitment strategy, employer positioning and candidate pipelines, including sourcing from non-traditional talent pools.',
+                t: 'Grant advisory',
+                d: 'Explore current grant pathways such as the EDGE Grant and Startup SG Founder, subject to programme requirements and business eligibility.'
               },
               {
-                t: 'Rapid team building',
-                d: 'Structured hiring sprints, onboarding systems and role design to take a team from zero to fully operational in months.',
+                t: 'EFS & loan structuring',
+                d: 'Understand relevant Enterprise Financing Scheme pathways and prepare a funding plan suited to your business needs.',
               },
               {
-                t: 'Workforce development',
-                d: 'Traineeship and career-conversion programme design, structured reskilling pathways and on-the-job training frameworks.',
+                t: 'Funding readiness',
+                d: 'Organise use-of-funds, cash-flow assumptions and supporting documents before approaching a funding provider.',
               },
               {
-                t: 'Organisational design',
-                d: 'Flexible and hybrid work models, performance frameworks, and inclusive practices that retain returning parents and senior talent.',
+                t: 'Offer review',
+                d: 'Compare lender terms and effective interest rates where applicable, and clarify repayment obligations before committing.',
               },
             ].map((x, i) => (
               <Reveal key={x.t} delay={i * 90} className="h-full">
                 <div className="h-full rounded-2xl bg-white p-6 shadow-sm">
                   <span className="text-sm font-bold text-coral-500">0{i + 1}</span>
-                  <h3 className="mt-1 font-bold text-ink-900">{x.t}</h3>
+                  <h3 className="mt-1 font-bold text-ink-900">{t(x.t)}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-600">{t(x.d)}</p>
                 </div>
               </Reveal>
             ))}
           </div>
+          <p className="mt-8 text-sm leading-relaxed text-ink-500 lg:col-span-2">
+            {t('Miss Niu Tech is an advisor, not a lender. Grants and loans are not guaranteed; eligibility, approval, terms and repayment obligations are determined by the relevant programme administrator or lender.')}
+          </p>
+          <Link to="/sme-financing" className="mt-5 inline-flex rounded-full bg-coral-500 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-coral-600 lg:col-span-2">
+            {t('Explore SME financing')}
+          </Link>
         </div>
       </section>
 
-      {/* AI Solutions */}
-      <section id="ai" className="scroll-mt-24">
+      {/* Technology and AI */}
+      <section id="technology" className="scroll-mt-24">
         <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2">
           <SectionHeading
-            eyebrow="03 · AI Solutions"
-            title="AI that pays for itself"
-            body="Close to 100 developers across China, India, Malaysia and Singapore build and deploy AI tools sourced from one of the world's leading AI ecosystems, adapted for Southeast Asian businesses and delivered end to end."
+            eyebrow="03 · Technology & AI"
+            title="Technology made for the way you work."
+            body="Miss Niu Tech combines software delivery with practical AI and process integration. We scope the work around your operations, success measures and the people who will use it."
           />
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               {
-                t: 'Design',
-                d: 'We map your operations and identify where AI genuinely saves cost or grows revenue, not AI for its own sake.',
+                t: 'Custom software',
+                d: 'Web and mobile applications, internal tools and business platforms designed around your workflows.'
               },
               {
-                t: 'Plan',
-                d: 'Detailed project plans, timelines and budgets with clear success metrics before a line of code is written.',
+                t: 'AI & automation',
+                d: 'AI assistants, content workflows and process automation selected for practical business use cases.'
               },
               {
-                t: 'Build',
-                d: 'Chatbots, content generation, workflow automation and custom systems built by our four regional development teams.',
+                t: 'Systems integration',
+                d: 'Connect CRM, ERP, HRM, POS and inventory systems, and improve the hand-offs between them.'
               },
               {
-                t: 'Implement',
-                d: 'Deployment into your business plus staff training, so the tools actually get used.',
+                t: 'AI-led growth workflows',
+                d: 'AI-assisted lead generation, content and search visibility workflows tailored to your market and team.'
               },
             ].map((x, i) => (
               <Reveal key={x.t} delay={i * 90} className="h-full">
                 <div className="h-full rounded-2xl border border-ink-100 p-6">
                   <span className="text-sm font-bold text-coral-500">0{i + 1}</span>
-                  <h3 className="mt-1 font-bold text-ink-900">{x.t}</h3>
+                  <h3 className="mt-1 font-bold text-ink-900">{t(x.t)}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-600">{t(x.d)}</p>
                 </div>
               </Reveal>
@@ -137,37 +151,40 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Digital Transformation & Marketing */}
-      <section id="digital" className="scroll-mt-24 bg-ink-50">
+      {/* Trade show management */}
+      <section id="trade-shows" className="scroll-mt-24 bg-ink-50">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading
-            eyebrow="04 · Digital Transformation & Marketing"
-            title="Systems that run themselves, brands that sell"
-            body="From software implementation and workflow re-engineering to premium brand positioning and performance marketing across the channels your customers actually use."
+            eyebrow="04 · Trade Shows & Market Activation"
+            title="Exhibit worldwide with a locally coordinated team."
+            body="Miss Niu Tech is the official marketing partner in Singapore for IBE and CMBe. We also tailor trade show sourcing and management for customers naming an event or market anywhere in the world, subject to organiser availability and event requirements."
           />
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {[
               {
-                t: 'Operational integration',
-                d: 'ERP, CRM, HRM, POS and inventory systems implemented and connected, with workflows redesigned so automation actually sticks.',
+                t: 'IBE & CMBe in Singapore',
+                d: 'Explore exhibitor opportunities for International Beauty Expo (IBE) and CMBe through Miss Niu Tech’s Singapore marketing partnership.',
               },
               {
-                t: 'Marketing strategy',
-                d: 'Digital customer journeys, AI-assisted content for lead generation, and campaign management across Meta, Google, Xiaohongshu and influencer channels.',
+                t: 'Custom global trade show management',
+                d: 'Name the show and destination. We can help source the opportunity and coordinate a tailored exhibitor plan worldwide.',
               },
             ].map((x, i) => (
               <Reveal key={x.t} delay={i * 100} className="h-full">
                 <div className="h-full rounded-2xl bg-white p-7 shadow-sm">
-                  <h3 className="font-bold text-ink-900">{x.t}</h3>
+                  <h3 className="font-bold text-ink-900">{t(x.t)}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-600">{t(x.d)}</p>
                 </div>
               </Reveal>
             ))}
           </div>
+          <Link to="/trade-shows" className="mt-8 inline-flex rounded-full border border-coral-300 px-5 py-3 text-sm font-semibold text-coral-700 transition-colors hover:bg-coral-100">
+            {t('Explore trade show support')}
+          </Link>
         </div>
       </section>
 
-      <CTASection />
+      <CTASection title="Let’s map your next growth move" body="Tell us what you’re planning, and we’ll help you identify the right people, funding pathway and technology support." />
     </>
   )
 }

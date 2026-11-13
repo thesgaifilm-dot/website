@@ -12,6 +12,7 @@ import { serviceSummaries, footprint, processSteps } from '../data/site'
 import { caseStudies } from '../data/caseStudies'
 
 const icons: Record<string, React.ReactNode> = {
+  shield: <path d="M12 3 20 6v5c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-3zm-3.5 9 2.3 2.3 4.7-4.8" />,
   people: <path d="M9 11a4 4 0 100-8 4 4 0 000 8zM2 21v-1a7 7 0 0114 0v1M17 4a4 4 0 010 7.5M22 21v-1a6.5 6.5 0 00-4-6" />,
   ai: <path d="M9 3v2M15 3v2M9 19v2M15 19v2M3 9h2M3 15h2M19 9h2M19 15h2M7 7h10v10H7zM10 10h4v4h-4z" />,
   globe: <path d="M12 3a9 9 0 100 18 9 9 0 000-18zM3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z" />,
@@ -25,9 +26,8 @@ export default function Home() {
   const [typed, setTyped] = useState(false)
   const heroSegments = useMemo(
     () => [
-      { text: `${t('We engineer')}${isChinese ? '' : ' '}` },
-      { text: t('growth'), className: 'text-coral-400' },
-      { text: `${isChinese ? '，' : ' '}${t('across borders, teams and technology')}` },
+      { text: t('Expand across Asia') },
+      { text: `${isChinese ? '' : ' '}${t('with compliance built in')}`, className: 'text-coral-200' },
     ],
     [t, isChinese],
   )
@@ -43,7 +43,7 @@ export default function Home() {
           className="hero-img-anim absolute inset-0 h-full w-full object-cover object-center"
         />
         <div
-          className="absolute inset-0 bg-ink-900/65 lg:bg-transparent lg:bg-gradient-to-r lg:from-ink-900 lg:via-ink-900/80 lg:to-ink-900/30"
+          className="absolute inset-0 bg-coral-900/75 lg:bg-transparent lg:bg-gradient-to-r lg:from-coral-900 lg:via-coral-900/80 lg:to-ink-900/35"
           aria-hidden="true"
         />
         <div
@@ -51,11 +51,11 @@ export default function Home() {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-6xl px-4 py-28 sm:px-6 lg:py-40">
+        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-40">
           <p className="hero-anim text-sm font-bold uppercase tracking-[0.25em] text-coral-400">
-            {t('Miss Niu Technology · Singapore')}
+            {t('Cross-border advisory · Singapore')}
           </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             <Typewriter
               segments={heroSegments}
               speed={32}
@@ -63,16 +63,19 @@ export default function Home() {
               onDone={() => setTyped(true)}
             />
           </h1>
-          <div className={`mt-9 flex flex-wrap gap-4 ${typed ? 'hero-anim' : 'opacity-0'}`}>
+          <p className={`mt-6 max-w-2xl text-lg leading-relaxed text-white/85 ${typed ? 'hero-anim' : 'opacity-0'}`}>
+            {t('We coordinate vetted compliance specialists, help businesses explore grants and financing options, and build technology that supports growth across borders.')}
+          </p>
+          <div className={`mt-9 flex flex-wrap gap-3 sm:gap-4 ${typed ? 'hero-anim' : 'opacity-0'}`}>
             <Link
               to="/contact"
-              className="rounded-full bg-coral-500 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-coral-500/25 transition-colors hover:bg-coral-600"
+              className="rounded-full bg-coral-500 px-5 py-3.5 text-sm font-semibold text-white shadow-lg shadow-coral-500/25 transition-colors hover:bg-coral-600 sm:px-7"
             >
               {t('Book a Consultation')}
             </Link>
             <Link
               to="/services"
-              className="rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:border-coral-400 hover:text-coral-400"
+              className="rounded-full border border-white/40 px-5 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:border-coral-400 hover:text-coral-400 sm:px-7"
             >
               {t('Explore Our Services')}
             </Link>
@@ -97,14 +100,14 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading
           eyebrow="What we do"
-          title="Four ways we grow your business"
-          body="One firm, end to end: we design the strategy, build the team and execute it on the ground in Singapore and across Asia."
+          title="Three service pillars. One trusted advisor."
+          body="Compliance advisory, funding support and in-house technology—coordinated around your goals and the markets where you want to grow."
         />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {serviceSummaries.map((s, i) => (
             <Reveal key={s.id} delay={i * 90}>
               <Link
-                to={`/services#${s.id}`}
+                to={s.id === 'funding' ? '/sme-financing' : `/services#${s.id}`}
                 className="group block h-full rounded-2xl border border-ink-100 p-7 transition-all hover:-translate-y-1 hover:border-coral-300 hover:shadow-lg"
               >
                 <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-coral-50 text-coral-600">
@@ -127,15 +130,15 @@ export default function Home() {
           <div>
             <SectionHeading
               eyebrow="Why Miss Niu"
-              title="A lean hub, a deep network"
-              body="Miss Niu runs a hub-and-spoke model: a lean Singapore core team, 80+ project consultants, and our own staffed offices in China and Malaysia. You get on-the-ground execution across Asia without paying for a bloated consultancy."
+              title="Founder-led advice. Coordinated delivery."
+              body="Bryan Ng leads the client relationship while Miss Niu coordinates the right specialists, funding partners and technology teams for each stage of expansion. One accountable point of contact keeps the work connected."
             />
             <Reveal delay={120}><ul className="mt-8 space-y-4">
               {[
-                'Our own offices, not just partners, in China and Malaysia',
-                'Live working partners in seven more Asian markets',
-                'Close to 100 AI developers across four countries',
-                'NDA-first confidentiality: we never publish client names',
+                'A central Singapore advisor coordinates your next move',
+                'Vetted specialists deliver regulated immigration and legal work',
+                'Cross-border coordination across Singapore, China and Malaysia',
+                'Technology and AI solutions tailored to business operations',
               ].map((point) => (
                 <li key={point} className="flex items-start gap-3 text-ink-700">
                   <svg viewBox="0 0 24 24" className="mt-0.5 h-5 w-5 shrink-0 text-coral-500" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -169,7 +172,7 @@ export default function Home() {
               </div>
             </div>
             <p className="mt-6 text-sm leading-relaxed text-ink-500">
-              {t('Wherever you need to do business in Asia, we have people who can act: market representative agreements, regulatory filings and everything in between.')}
+              {t('Our network supports client-specific introductions, regulatory coordination and on-the-ground execution. Local scope and provider availability are confirmed for each engagement.')}
             </p>
           </div></Reveal>
         </div>
@@ -179,8 +182,8 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading
           eyebrow="How it works"
-          title="Three documents. Three steps."
-          body="We built our process so that busy owners barely lift a finger."
+          title="From first conversation to coordinated delivery."
+          body="A clear process keeps your priorities, specialists and next steps connected."
           center
         />
         <div className="mt-12 grid gap-8 md:grid-cols-3">

@@ -48,6 +48,18 @@ const guides = [
       'Pilot with users, train teams, measure adoption and iterate',
     ],
   },
+  {
+    id: 'sme-financing-readiness',
+    title: 'The SME financing readiness checklist',
+    summary: 'Prepare for funding conversations by clarifying your purpose, readiness and ability to meet obligations.',
+    checklist: [
+      'Define the purpose, amount and timing of the funding need',
+      'Separate grant eligibility from loan repayment obligations',
+      'Prepare recent financials, cash-flow assumptions and supporting documents',
+      'Compare fees, effective rates, tenure, security and guarantees',
+      'Verify current programme terms with official sources and providers',
+    ],
+  },
 ]
 
 export default function Guides() {

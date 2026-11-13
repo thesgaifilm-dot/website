@@ -4,16 +4,16 @@
 @theme {
   --font-sans: 'Inter Variable', 'Noto Sans SC Variable', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --color-coral-50: #fef3f3;
-  --color-coral-100: #fde4e4;
-  --color-coral-200: #fbcdce;
-  --color-coral-300: #f7a9ab;
-  --color-coral-400: #f47e81;
-  --color-coral-500: #ef5a5f;
-  --color-coral-600: #d93a40;
-  --color-coral-700: #b62c31;
-  --color-coral-800: #97282c;
-  --color-coral-900: #7e2629;
+  --color-coral-50: #fbf3f5;
+  --color-coral-100: #f4e3e8;
+  --color-coral-200: #e9c6d1;
+  --color-coral-300: #d89eaf;
+  --color-coral-400: #bd748a;
+  --color-coral-500: #8b1e3f;
+  --color-coral-600: #761a35;
+  --color-coral-700: #63172d;
+  --color-coral-800: #4f1425;
+  --color-coral-900: #3d101d;
 
   --color-ink-50: #f6f6f7;
   --color-ink-100: #e2e3e6;
