@@ -25,6 +25,16 @@ export const pageMeta: Record<string, PageMeta> = {
     description:
       'Overseas development consultation, HR & workforce consultancy, AI solutions and digital transformation: strategy, people and technology under one roof, delivered on the ground across Asia.',
   },
+  '/trade-shows': {
+    title: 'Trade Shows | Miss Niu Technology',
+    description:
+      'Trade show planning and on-the-ground support across Asia. Align event choice, preparation, local context and follow-up with your market-entry goals.',
+  },
+  '/guides': {
+    title: 'Business Guides | Miss Niu Technology',
+    description:
+      'Practical business guides and checklists for Asia market entry, cross-border teams, AI adoption and digital transformation from Miss Niu Technology.',
+  },
   '/consulting-suite-mq7x': {
     title: 'Consulting Suite | Miss Niu Technology',
     description:
