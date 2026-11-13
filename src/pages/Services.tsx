@@ -95,7 +95,10 @@ export default function Services() {
               },
             ].map((x, i) => (
               <Reveal key={x.t} delay={i * 90} className="h-full">
-                <div className="h-full rounded-2xl bg-white p-6 shadow-sm">
+                <div
+                  id={x.t === 'Optional grant support' ? 'grants' : undefined}
+                  className="h-full scroll-mt-24 rounded-2xl bg-white p-6 shadow-sm"
+                >
                   <span className="text-sm font-bold text-coral-500">0{i + 1}</span>
                   <h3 className="mt-1 font-bold text-ink-900">{t(x.t)}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-600">{t(x.d)}</p>

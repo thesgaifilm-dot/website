@@ -1,56 +1,65 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
 import Logo from './Logo'
 
 const pageLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/services', label: 'Services' },
-  { to: '/sme-financing', label: 'SME Financing' },
-  { to: '/trade-shows', label: 'Trade Shows' },
-  { to: '/guides', label: 'Guides' },
-  { to: '/consulting-suite-mq7x', label: 'Book Consulting' },
   { to: '/about', label: 'About Us' },
-  { to: '/contact', label: 'Contact', primary: true },
+  { to: '/sme-financing', label: 'SME Financing' },
+  { to: '/services#grants', label: 'SME Grants' },
+  { to: '/guides', label: 'Compliance Guides' },
+  { to: '/services', label: 'Services' },
+  { to: '/trade-shows', label: 'Tradeshows' },
+  { to: '/about#case-studies', label: 'Case Studies' },
+  { to: '/contact', label: 'Contact Info' },
+  { to: '/consulting-suite-mq7x', label: 'Booking Consulting', primary: true },
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const { t } = useTranslation()
+  const location = useLocation()
 
   const closeMenu = () => setOpen(false)
+  const isCurrentPage = (to: string) => {
+    const [pathname, hash] = to.split('#')
+    return location.pathname === pathname && (hash ? location.hash === `#${hash}` : !location.hash)
+  }
+
+  const pageLinkClass = (to: string, primary = false) => {
+    const isActive = isCurrentPage(to)
+    return `inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral-500 ${
+      primary
+        ? 'bg-ink-900 text-white shadow-sm hover:bg-coral-700'
+        : isActive
+          ? 'text-coral-700 underline decoration-2 underline-offset-8'
+          : 'text-ink-800 hover:text-coral-700 hover:underline hover:decoration-2 hover:underline-offset-8'
+    }`
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink-100 bg-white/95 backdrop-blur">
-      <nav aria-label={t('Main navigation')} className="mx-auto flex min-h-18 max-w-screen-2xl items-center justify-between gap-4 px-4 sm:px-6">
+      <nav aria-label={t('Main navigation')} className="mx-auto flex min-h-18 w-full max-w-[1400px] flex-nowrap items-center justify-between gap-3 px-4 sm:px-6">
         <Link to="/" onClick={closeMenu} aria-label={t('Miss Niu Technology, home')} className="shrink-0">
           <Logo />
         </Link>
 
-        <div className="hidden min-w-0 flex-1 items-center justify-between gap-3 xl:flex">
-          <div className="ml-auto flex min-w-0 flex-1 items-center justify-between gap-1">
+        <div className="hidden min-w-0 flex-1 items-center justify-end gap-3 xl:flex">
+          <LanguageSwitcher className="shrink-0" />
+          <div className="ml-auto flex min-w-0 flex-1 flex-nowrap items-center justify-between gap-1">
             {pageLinks.map((link) => (
-              <NavLink
+              <Link
                 key={link.to}
                 to={link.to}
                 onClick={closeMenu}
-                end={link.to === '/'}
-                className={({ isActive }) =>
-                  `whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral-500 ${
-                    link.primary
-                      ? 'bg-coral-500 text-white shadow-sm hover:bg-coral-600'
-                      : isActive
-                        ? 'bg-coral-50 text-coral-700'
-                        : 'text-ink-700 hover:bg-ink-50 hover:text-coral-700'
-                  }`
-                }
+                aria-current={isCurrentPage(link.to) ? 'page' : undefined}
+                className={pageLinkClass(link.to, link.primary)}
               >
                 {t(link.label)}
-              </NavLink>
+              </Link>
             ))}
           </div>
-          <LanguageSwitcher className="shrink-0" />
         </div>
 
         <div className="flex shrink-0 items-center gap-2 xl:hidden">
@@ -72,25 +81,23 @@ export default function Navbar() {
 
       {open && (
         <div id="mobile-page-navigation" className="border-t border-ink-100 bg-white px-4 pb-5 pt-2 xl:hidden">
-          <div className="mx-auto grid max-w-screen-2xl gap-1 sm:grid-cols-2">
+          <div className="mx-auto grid max-w-[1400px] gap-1 sm:grid-cols-2">
             {pageLinks.map((link) => (
-              <NavLink
+              <Link
                 key={link.to}
                 to={link.to}
                 onClick={closeMenu}
-                end={link.to === '/'}
-                className={({ isActive }) =>
-                  `rounded-xl px-4 py-3 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-coral-500 ${
-                    link.primary
-                      ? 'bg-coral-500 text-white hover:bg-coral-600'
-                      : isActive
-                        ? 'bg-coral-50 text-coral-700'
-                        : 'text-ink-800 hover:bg-ink-50'
-                  }`
-                }
+                aria-current={isCurrentPage(link.to) ? 'page' : undefined}
+                className={`rounded-xl px-4 py-3 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-coral-500 ${
+                  link.primary
+                    ? 'bg-ink-900 text-white hover:bg-coral-700'
+                    : isCurrentPage(link.to)
+                      ? 'bg-coral-50 text-coral-700'
+                      : 'text-ink-800 hover:bg-ink-50'
+                }`}
               >
                 {t(link.label)}
-              </NavLink>
+              </Link>
             ))}
           </div>
         </div>
