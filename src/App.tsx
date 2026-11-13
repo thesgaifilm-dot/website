@@ -7,6 +7,8 @@ import ScrollToTop from './components/ScrollToTop'
 import WhatsAppFloat from './components/WhatsAppFloat'
 import Home from './pages/Home'
 import Services from './pages/Services'
+import TradeShows from './pages/TradeShows'
+import Guides from './pages/Guides'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import ConsultingSuite from './pages/ConsultingSuite'
@@ -66,6 +68,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/trade-shows" element={<TradeShows />} />
+          <Route path="/guides" element={<Guides />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           {/* Linked from the navbar and listed in the sitemap */}
