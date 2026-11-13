@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import LanguageSwitcher from './LanguageSwitcher'
 import Logo from './Logo'
 
 const links = [
@@ -12,11 +14,12 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const { t } = useTranslation()
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink-100 bg-white/90 backdrop-blur">
       <nav className="mx-auto flex h-18 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link to="/" onClick={() => setOpen(false)} aria-label="Miss Niu Technology, home">
+        <Link to="/" onClick={() => setOpen(false)} aria-label={t('Miss Niu Technology, home')}>
           <Logo />
         </Link>
 
@@ -31,27 +34,31 @@ export default function Navbar() {
                 }`
               }
             >
-              {l.label}
+              {t(l.label)}
             </NavLink>
           ))}
+          <LanguageSwitcher />
           <Link
             to="/contact"
             className="rounded-full bg-coral-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-coral-600"
           >
-            Book a Consultation
+            {t('Book a Consultation')}
           </Link>
         </div>
 
-        <button
-          className="flex h-10 w-10 items-center justify-center rounded-lg text-ink-800 md:hidden"
-          onClick={() => setOpen(!open)}
-          aria-expanded={open}
-          aria-label="Toggle menu"
-        >
-          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
-            {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-          </svg>
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSwitcher />
+          <button
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-ink-800"
+            onClick={() => setOpen(!open)}
+            aria-expanded={open}
+            aria-label={open ? t('Close menu') : t('Open menu')}
+          >
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
+              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+            </svg>
+          </button>
+        </div>
       </nav>
 
       {open && (
@@ -65,7 +72,7 @@ export default function Navbar() {
                 `block py-3 text-base font-medium ${isActive ? 'text-coral-600' : 'text-ink-800'}`
               }
             >
-              {l.label}
+              {t(l.label)}
             </NavLink>
           ))}
           <Link
@@ -73,7 +80,7 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
             className="mt-3 block rounded-full bg-coral-500 px-5 py-3 text-center text-sm font-semibold text-white"
           >
-            Book a Consultation
+            {t('Book a Consultation')}
           </Link>
         </div>
       )}

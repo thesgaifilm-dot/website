@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import SectionHeading from './SectionHeading'
 import { clients, type ClientLogo } from '../data/clients'
 
@@ -16,6 +17,8 @@ const rows: ClientLogo[][] = [
 ]
 
 function MarqueeRow({ items, reverse = false }: { items: ClientLogo[]; reverse?: boolean }) {
+  const { t } = useTranslation()
+
   return (
     <div
       className={`animate-marquee flex w-max items-center gap-5 pr-5 ${reverse ? 'marquee-reverse' : ''}`}
@@ -28,7 +31,7 @@ function MarqueeRow({ items, reverse = false }: { items: ClientLogo[]; reverse?:
         >
           <img
             src={`/media/clients/${c.file}`}
-            alt={c.name}
+            alt={t('Client logo: {{name}}', { name: c.name })}
             loading="lazy"
             className="max-h-full max-w-full object-contain"
           />
@@ -39,13 +42,15 @@ function MarqueeRow({ items, reverse = false }: { items: ClientLogo[]; reverse?:
 }
 
 export default function ClientsWall() {
+  const { t } = useTranslation()
+
   return (
     <section id="clients" className="scroll-mt-24 overflow-hidden py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading eyebrow="Our clients" title="Brands that trust Miss Niu" center />
         <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-ink-600">
-          From homegrown F&amp;B names to insurers, clinics, and construction firms:
-          {` ${clients.length}`}+ businesses across Singapore and the region.
+          {t('From homegrown F&B names to insurers, clinics, and construction firms:')}{' '}
+          {t('{{count}}+ businesses across Singapore and the region.', { count: clients.length })}
         </p>
       </div>
 

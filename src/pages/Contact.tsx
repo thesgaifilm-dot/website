@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { FormEvent } from 'react'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
@@ -15,6 +16,7 @@ const interests = [
 const companySizes = ['1–10 employees', '11–50 employees', '51–200 employees', 'More than 200 employees']
 
 export default function Contact() {
+  const { t } = useTranslation()
   const [form, setForm] = useState({
     name: '',
     company: '',
@@ -31,14 +33,14 @@ export default function Contact() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     const text = [
-      `Hello Miss Niu, I'd like to book a consultation.`,
-      `Name: ${form.name}`,
-      `Company: ${form.company}`,
-      form.email && `Email: ${form.email}`,
-      form.phone && `Phone: ${form.phone}`,
-      `Interested in: ${form.interest}`,
-      `Company size: ${form.size}`,
-      form.message && `Details: ${form.message}`,
+      t("Hello Miss Niu, I'd like to book a consultation."),
+      `${t('Name')}: ${form.name}`,
+      `${t('Company')}: ${form.company}`,
+      form.email && `${t('Email')}: ${form.email}`,
+      form.phone && `${t('Phone')}: ${form.phone}`,
+      `${t('Interested in')}: ${t(form.interest)}`,
+      `${t('Company size')}: ${t(form.size)}`,
+      form.message && `${t('Details')}: ${form.message}`,
     ]
       .filter(Boolean)
       .join('\n')
@@ -62,41 +64,41 @@ export default function Contact() {
         <form onSubmit={handleSubmit} className="rounded-3xl border border-ink-100 p-7 sm:p-10">
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="block">
-              <span className="mb-1.5 block text-sm font-semibold text-ink-800">Your name *</span>
-              <input required value={form.name} onChange={(e) => set('name', e.target.value)} className={inputCls} placeholder="Tan Wei Ming" />
+              <span className="mb-1.5 block text-sm font-semibold text-ink-800">{t('Your name *')}</span>
+              <input required value={form.name} onChange={(e) => set('name', e.target.value)} className={inputCls} placeholder={t('Tan Wei Ming')} />
             </label>
             <label className="block">
-              <span className="mb-1.5 block text-sm font-semibold text-ink-800">Company *</span>
-              <input required value={form.company} onChange={(e) => set('company', e.target.value)} className={inputCls} placeholder="Acme Pte Ltd" />
+              <span className="mb-1.5 block text-sm font-semibold text-ink-800">{t('Company *')}</span>
+              <input required value={form.company} onChange={(e) => set('company', e.target.value)} className={inputCls} placeholder={t('Acme Pte Ltd')} />
             </label>
             <label className="block">
-              <span className="mb-1.5 block text-sm font-semibold text-ink-800">Email</span>
+              <span className="mb-1.5 block text-sm font-semibold text-ink-800">{t('Email')}</span>
               <input type="email" value={form.email} onChange={(e) => set('email', e.target.value)} className={inputCls} placeholder="you@company.sg" />
             </label>
             <label className="block">
-              <span className="mb-1.5 block text-sm font-semibold text-ink-800">Phone</span>
+              <span className="mb-1.5 block text-sm font-semibold text-ink-800">{t('Phone')}</span>
               <input type="tel" value={form.phone} onChange={(e) => set('phone', e.target.value)} className={inputCls} placeholder="+65 9XXX XXXX" />
             </label>
             <label className="block">
-              <span className="mb-1.5 block text-sm font-semibold text-ink-800">What do you need help with? *</span>
+              <span className="mb-1.5 block text-sm font-semibold text-ink-800">{t('What do you need help with? *')}</span>
               <select value={form.interest} onChange={(e) => set('interest', e.target.value)} className={inputCls}>
                 {interests.map((i) => (
-                  <option key={i}>{i}</option>
+                  <option key={i} value={i}>{t(i)}</option>
                 ))}
               </select>
             </label>
             <label className="block">
-              <span className="mb-1.5 block text-sm font-semibold text-ink-800">Company size *</span>
+              <span className="mb-1.5 block text-sm font-semibold text-ink-800">{t('Company size *')}</span>
               <select value={form.size} onChange={(e) => set('size', e.target.value)} className={inputCls}>
                 {companySizes.map((s) => (
-                  <option key={s}>{s}</option>
+                  <option key={s} value={s}>{t(s)}</option>
                 ))}
               </select>
             </label>
           </div>
           <label className="mt-5 block">
-            <span className="mb-1.5 block text-sm font-semibold text-ink-800">Tell us a little about your goals</span>
-            <textarea rows={4} value={form.message} onChange={(e) => set('message', e.target.value)} className={inputCls} placeholder="e.g. We want to automate our order processing and expand to Malaysia next year…" />
+            <span className="mb-1.5 block text-sm font-semibold text-ink-800">{t('Tell us a little about your goals')}</span>
+            <textarea rows={4} value={form.message} onChange={(e) => set('message', e.target.value)} className={inputCls} placeholder={t('e.g. We want to automate our order processing and expand to Malaysia next year…')} />
           </label>
 
           <label className="mt-5 flex items-start gap-3 text-sm text-ink-600">
@@ -108,8 +110,7 @@ export default function Contact() {
               className="mt-0.5 h-4 w-4 accent-coral-500"
             />
             <span>
-              I consent to {site.legalName} collecting and using the personal data provided above to
-              respond to my enquiry, in accordance with the Personal Data Protection Act 2012. *
+              {t('I consent to {{company}} collecting and using the personal data provided above to respond to my enquiry, in accordance with the Personal Data Protection Act 2012. *', { company: site.legalName })}
             </span>
           </label>
 
@@ -117,11 +118,10 @@ export default function Contact() {
             type="submit"
             className="mt-7 w-full rounded-full bg-coral-500 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-coral-600 sm:w-auto"
           >
-            Send via WhatsApp →
+            {t('Send via WhatsApp →')}
           </button>
           <p className="mt-3 text-xs text-ink-500">
-            Submitting opens WhatsApp with your message pre-filled. Nothing is sent until you press
-            send there, and we respond within one business day.
+            {t('Submitting opens WhatsApp with your message pre-filled. Nothing is sent until you press send there, and we respond within one business day.')}
           </p>
         </form>
         </Reveal>
@@ -130,23 +130,23 @@ export default function Contact() {
         <Reveal delay={140}>
         <div className="space-y-6">
           <div className="rounded-3xl bg-ink-900 p-8">
-            <h2 className="text-lg font-bold text-white">Prefer to talk directly?</h2>
+            <h2 className="text-lg font-bold text-white">{t('Prefer to talk directly?')}</h2>
             <a
               href={site.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 block rounded-full bg-coral-500 px-6 py-3.5 text-center text-sm font-semibold text-white transition-colors hover:bg-coral-600"
             >
-              WhatsApp {site.phone}
+              {t('WhatsApp {{phone}}', { phone: site.phone })}
             </a>
             <a
               href={site.phoneHref}
               className="mt-3 block rounded-full border border-ink-600 px-6 py-3.5 text-center text-sm font-semibold text-white transition-colors hover:border-coral-400"
             >
-              Call {site.phone}
+              {t('Call {{phone}}', { phone: site.phone })}
             </a>
             <p className="mt-4 text-xs leading-relaxed text-ink-400">
-              {site.legalName} · Singapore HQ, with offices in China and Malaysia.
+              {t('{{company}} · Singapore HQ, with offices in China and Malaysia.', { company: site.legalName })}
             </p>
           </div>
 

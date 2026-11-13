@@ -1,12 +1,15 @@
+import { useTranslation } from 'react-i18next'
 import { site } from '../data/site'
 
 export default function WhatsAppFloat() {
+  const { t } = useTranslation()
+
   return (
     <a
       href={site.whatsapp}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Chat with us on WhatsApp at ${site.phone}`}
+      aria-label={t('Chat with us on WhatsApp at {{phone}}', { phone: site.phone })}
       className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg shadow-black/25 transition-transform hover:scale-110 sm:bottom-7 sm:right-7"
     >
       <svg viewBox="0 0 32 32" className="h-8 w-8" fill="#fff" aria-hidden="true">

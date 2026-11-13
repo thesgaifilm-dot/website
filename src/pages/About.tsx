@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import SectionHeading from '../components/SectionHeading'
 import ClientsWall from '../components/ClientsWall'
 import CTASection from '../components/CTASection'
@@ -35,6 +36,8 @@ const timeline = [
 ]
 
 export default function About() {
+  const { t } = useTranslation()
+
   return (
     <>
       <PageHero
@@ -53,22 +56,20 @@ export default function About() {
               body="Military discipline, pandemic era entrepreneurship and a year inside China's AI ecosystem shaped how Miss Niu executes today."
             />
             <Reveal delay={140} className="mt-8"><div className="rounded-2xl bg-coral-50 p-6">
-              <p className="text-sm font-bold uppercase tracking-wider text-coral-600">As featured on</p>
+              <p className="text-sm font-bold uppercase tracking-wider text-coral-600">{t('As featured on')}</p>
               <p className="mt-2 text-lg font-bold text-ink-900">CNA · TODAY · Channel 8</p>
               <p className="mt-2 text-sm leading-relaxed text-ink-600">
-                "On the Talent Hunt" (Aug 2022) covered how his agency used Workforce Singapore's
-                Career Trial programme to grow talent from non-traditional backgrounds; Channel 8
-                featured him as an employer at WSG's Bedok hiring event.
+                {t('"On the Talent Hunt" (Aug 2022) covered how his agency used Workforce Singapore\'s Career Trial programme to grow talent from non-traditional backgrounds; Channel 8 featured him as an employer at WSG\'s Bedok hiring event.')}
               </p>
             </div></Reveal>
           </div>
           <Reveal delay={100}><ol className="relative space-y-8 border-l-2 border-coral-200 pl-8">
-            {timeline.map((t) => (
-              <li key={t.year} className="relative">
+            {timeline.map((milestone) => (
+              <li key={milestone.year} className="relative">
                 <span className="absolute -left-[2.45rem] top-1 h-4 w-4 rounded-full border-4 border-white bg-coral-500" />
-                <p className="text-sm font-bold uppercase tracking-wider text-coral-600">{t.year}</p>
-                <h3 className="mt-1 text-lg font-bold text-ink-900">{t.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-ink-600">{t.body}</p>
+                <p className="text-sm font-bold uppercase tracking-wider text-coral-600">{t(milestone.year)}</p>
+                <h3 className="mt-1 text-lg font-bold text-ink-900">{t(milestone.title)}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-ink-600">{t(milestone.body)}</p>
               </li>
             ))}
           </ol></Reveal>
@@ -93,10 +94,10 @@ export default function About() {
                 <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wider text-ink-400">
-                      {c.jurisdictions.join(' · ')} · {c.clientType}
+                      {c.jurisdictions.map((jurisdiction) => t(jurisdiction)).join(' · ')} · {t(c.clientType)}
                     </p>
-                    <h3 className="mt-1.5 text-xl font-bold text-ink-900">{c.title}</h3>
-                    <p className="mt-1.5 text-sm font-semibold text-coral-600">{c.highlight}</p>
+                    <h3 className="mt-1.5 text-xl font-bold text-ink-900">{t(c.title)}</h3>
+                    <p className="mt-1.5 text-sm font-semibold text-coral-600">{t(c.highlight)}</p>
                   </div>
                   <span className="mt-1 shrink-0 rounded-full border border-ink-200 p-2 text-ink-500 transition-transform group-open:rotate-45">
                     <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -106,18 +107,18 @@ export default function About() {
                 </summary>
                 <div className="mt-6 grid gap-6 border-t border-ink-100 pt-6 md:grid-cols-3">
                   <div>
-                    <h4 className="text-sm font-bold uppercase tracking-wider text-ink-500">The problem</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-700">{c.problem}</p>
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-ink-500">{t('The problem')}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-700">{t(c.problem)}</p>
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold uppercase tracking-wider text-ink-500">Our solution</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-700">{c.solution}</p>
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-ink-500">{t('Our solution')}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-700">{t(c.solution)}</p>
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold uppercase tracking-wider text-ink-500">The result</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-700">{c.result}</p>
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-ink-500">{t('The result')}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-700">{t(c.result)}</p>
                     <p className="mt-3 inline-block rounded-full bg-ink-50 px-3 py-1 text-xs font-semibold text-ink-600">
-                      {c.status}
+                      {t(c.status)}
                     </p>
                   </div>
                 </div>

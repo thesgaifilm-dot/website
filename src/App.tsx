@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -11,9 +12,21 @@ import Contact from './pages/Contact'
 import ConsultingSuite from './pages/ConsultingSuite'
 import SiteAnalytics from './pages/SiteAnalytics'
 import { pageMeta, defaultMeta } from './data/seo'
+import { persistSiteLanguage, resolveSiteLanguage } from './i18n'
 
 export default function App() {
   const location = useLocation()
+  const { t, i18n } = useTranslation()
+
+  useEffect(() => {
+    const language = resolveSiteLanguage(location.search)
+    persistSiteLanguage(language)
+    if (i18n.resolvedLanguage !== language) void i18n.changeLanguage(language)
+  }, [location.search, i18n])
+
+  useEffect(() => {
+    document.getElementById('app-loader')?.setAttribute('aria-label', t('Loading Miss Niu Technology'))
+  }, [t])
 
   useEffect(() => {
     const loader = document.getElementById('app-loader')
@@ -36,11 +49,11 @@ export default function App() {
   // right values on first load).
   useEffect(() => {
     const meta = pageMeta[location.pathname] ?? defaultMeta
-    document.title = meta.title
+    document.title = t(meta.title)
     document
       .querySelector('meta[name="description"]')
-      ?.setAttribute('content', meta.description)
-  }, [location.pathname])
+      ?.setAttribute('content', t(meta.description))
+  }, [location.pathname, t])
 
   // The analytics page is a standalone tool view: no site chrome.
   const bare = location.pathname === '/site-analytics-k4n8'
