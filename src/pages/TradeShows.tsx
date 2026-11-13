@@ -7,11 +7,13 @@ import SectionHeading from '../components/SectionHeading'
 const featuredShows = [
   {
     name: 'International Beauty Expo Malaysia',
+    abbreviation: 'IBE',
     image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/International%20beauty%20expo%20malaysia-KcydMuI7XeJ91d8I51TbJLZlzdM1SF.png',
     alt: 'International Beauty Expo Malaysia logo with a magenta flower icon, green IBE lettering, and English and Chinese event name.',
   },
   {
     name: 'beautyexpo | cosmobeauté Malaysia',
+    abbreviation: 'CMBe',
     image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cosmosbeauty%20malaysia%20beauty%20expo-hXbWSklNDKBTyRdYyBfUiGKFaKXo2O.jpeg',
     alt: 'beautyexpo | cosmobeauté Malaysia logo in orange, gray and gold.',
   },
@@ -61,9 +63,9 @@ export default function TradeShows() {
       <section className="bg-ink-50">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <SectionHeading
-            eyebrow="Beauty trade shows"
-            title="Explore beauty exhibitions in Malaysia"
-            body="Explore these event brands and use each organiser’s current exhibitor information to plan your meetings."
+            eyebrow="Official Singapore marketing partner"
+            title="Meet IBE and CMBe through Miss Niu Tech"
+            body="Miss Niu Tech is the official marketing partner in Singapore for International Beauty Expo (IBE) and CMBe (beautyexpo | cosmobeauté Malaysia). Contact us for current exhibitor and participation information."
             center
           />
 
@@ -79,9 +81,33 @@ export default function TradeShows() {
                     className="max-h-full max-w-full object-contain"
                   />
                 </div>
-                <h3 className="mt-4 text-lg font-bold text-ink-900">{t(show.name)}</h3>
+                <h3 className="mt-4 text-lg font-bold text-ink-900">
+                  <span className="mr-2 text-sm font-bold tracking-wide text-coral-600">{show.abbreviation}</span>
+                  {t(show.name)}
+                </h3>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-ink-50">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-6 md:grid-cols-[0.8fr_1.2fr] md:items-center">
+          <SectionHeading
+            eyebrow="Worldwide customised trade show management"
+            title="Name the show. We’ll tailor the plan."
+          />
+          <div className="space-y-4 text-lg leading-relaxed text-ink-600">
+            <p>
+              {t(
+                'Whether you have a specific show in mind or only a target country, Miss Niu Tech can tailor trade show research and management to your goals worldwide. We can help source suitable opportunities and coordinate a participation plan, subject to organiser availability and event requirements.',
+              )}
+            </p>
+            <p>
+              {t(
+                'From show research and exhibitor options to planning, logistics and post-show follow-up, the scope is customised to your business.',
+              )}
+            </p>
           </div>
         </div>
       </section>
@@ -164,8 +190,8 @@ export default function TradeShows() {
       </section>
 
       <CTASection
-        title="Planning a trade show in Asia?"
-        body="Tell us your target market, audience and goals. We will help you map the practical next steps."
+        title="Name the show. We’ll build your plan."
+        body="From IBE and CMBe in Singapore to customised trade show management worldwide, tell us where you want to exhibit and we’ll help organise the next steps."
       />
     </>
   )

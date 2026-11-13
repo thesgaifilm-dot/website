@@ -16,6 +16,7 @@ const linksAfterResources = [
 ]
 
 const resourceLinks = [
+  { to: '/sme-financing', label: 'SME Financing' },
   { to: '/trade-shows', label: 'Trade Shows' },
   { to: '/guides', label: 'Guides' },
 ]

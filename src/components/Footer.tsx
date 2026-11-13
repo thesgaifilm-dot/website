@@ -26,10 +26,10 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wider text-white">{t('Services')}</h3>
           <ul className="mt-4 space-y-2.5 text-sm">
-            <li><Link to="/services#overseas" className="hover:text-coral-400">{t('Overseas Development')}</Link></li>
-            <li><Link to="/services#hr" className="hover:text-coral-400">{t('HR & Workforce')}</Link></li>
-            <li><Link to="/services#ai" className="hover:text-coral-400">{t('AI Solutions')}</Link></li>
-            <li><Link to="/services#digital" className="hover:text-coral-400">{t('Digital & Marketing')}</Link></li>
+            <li><Link to="/services#compliance" className="hover:text-coral-400">{t('Compliance Advisory')}</Link></li>
+            <li><Link to="/sme-financing" className="hover:text-coral-400">{t('SME Financing')}</Link></li>
+            <li><Link to="/services#technology" className="hover:text-coral-400">{t('Technology & AI')}</Link></li>
+            <li><Link to="/trade-shows" className="hover:text-coral-400">{t('Trade Shows')}</Link></li>
           </ul>
         </div>
       </div>

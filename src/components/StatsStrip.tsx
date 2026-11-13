@@ -54,7 +54,7 @@ export default function StatsStrip() {
         ))}
       </div>
       <p className="pb-6 text-center text-[0.7rem] text-ink-500">
-        {t("Track record across our founder's ventures and client engagements since 2019.")}
+        {t('Figures are based on Miss Niu Tech portfolio data and founder-led engagements; results vary by project and client.')}
       </p>
     </section>
   )

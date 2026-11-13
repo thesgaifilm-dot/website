@@ -6,9 +6,9 @@ export interface PageMeta {
 }
 
 export const defaultMeta: PageMeta = {
-  title: 'Miss Niu Technology | Overseas Development, HR & AI Consultancy',
+  title: 'Miss Niu Tech | Compliance Advisory & Growth Across Asia',
   description:
-    'Miss Niu Technology Pte Ltd is a strategic development and global growth architecture firm offering overseas development consultation, HR & workforce consultancy, AI solutions and digital transformation across Asia.',
+    'Singapore-based cross-border compliance advisory, SME funding guidance and in-house technology solutions for businesses expanding across Asia.',
 }
 
 /**
@@ -21,34 +21,39 @@ export const defaultMeta: PageMeta = {
 export const pageMeta: Record<string, PageMeta> = {
   '/': defaultMeta,
   '/services': {
-    title: 'Services | Miss Niu Technology',
+    title: 'Services | Miss Niu Tech',
     description:
-      'Overseas development consultation, HR & workforce consultancy, AI solutions and digital transformation: strategy, people and technology under one roof, delivered on the ground across Asia.',
+      'Compliance advisory, grant and SME financing support, custom software and AI delivery, and global trade show management for businesses expanding across Asia.',
+  },
+  '/sme-financing': {
+    title: 'SME Financing in Singapore | Miss Niu Tech',
+    description:
+      'Explore Singapore SME grant and financing pathways with practical support for funding readiness, scheme review and lender discussions. Approval is not guaranteed.',
   },
   '/trade-shows': {
-    title: 'Trade Shows | Miss Niu Technology',
+    title: 'Trade Shows | Miss Niu Tech',
     description:
-      'Trade show planning and on-the-ground support across Asia. Align event choice, preparation, local context and follow-up with your market-entry goals.',
+      'Official Singapore marketing partner for IBE and CMBe, with customised trade show sourcing and management worldwide, subject to event availability and requirements.',
   },
   '/guides': {
-    title: 'Business Guides | Miss Niu Technology',
+    title: 'Business Guides | Miss Niu Tech',
     description:
-      'Practical business guides and checklists for Asia market entry, cross-border teams, AI adoption and digital transformation from Miss Niu Technology.',
+      'Practical checklists for cross-border compliance, Singapore SME funding, team planning and technology adoption.',
   },
   '/consulting-suite-mq7x': {
-    title: 'Consulting Suite | Miss Niu Technology',
+    title: 'Consulting Suite | Miss Niu Tech',
     description:
       'Three fixed-price consulting engagements, bookable directly: a growth strategy consultation, an HR & workforce compliance audit, and an overseas market-entry blueprint.',
   },
   '/about': {
-    title: 'About Us | Miss Niu Technology',
+    title: 'About Miss Niu Tech | Bryan Ng, Founder & Director',
     description:
-      'Miss Niu Technology is a growth architecture firm built the hard way: founder-led, with 200+ businesses advised since 2019 and teams on the ground in Singapore, China and Malaysia.',
+      'Meet Bryan Ng and learn how Miss Niu Tech combines cross-border compliance advisory, SME financing support and technology delivery from Singapore.',
   },
   '/contact': {
-    title: 'Contact Us | Miss Niu Technology',
+    title: 'Contact Miss Niu Tech',
     description:
-      'Book a free consultation with Miss Niu Technology. Reach us by WhatsApp, phone or the enquiry form to discuss overseas expansion, workforce planning or AI solutions.',
+      'Contact Miss Niu Tech to discuss compliance advisory, Singapore SME financing, technology and AI solutions, or global trade show management.',
   },
 }
 

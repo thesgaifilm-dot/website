@@ -6,10 +6,10 @@ import Reveal from '../components/Reveal'
 import { site } from '../data/site'
 
 const interests = [
-  'Overseas development consultation',
-  'HR & workforce consultancy',
-  'AI solutions',
-  'Digital transformation / marketing',
+  'Compliance advisory',
+  'SME financing and grant support',
+  'Technology and AI solutions',
+  'Trade show management',
   'Not sure yet, advise me',
 ]
 
