@@ -13,7 +13,7 @@ export default function Services() {
     <>
       <PageHero
         title="Services"
-        subtitle="Compliance advisory, funding guidance and in-house technology for cross-border growth."
+        subtitle="Compliance advisory, business and financing guidance, in-house technology and trade show support for cross-border growth."
         image="/media/hero-services.jpg"
       />
 
@@ -71,27 +71,27 @@ export default function Services() {
       <section id="funding" className="scroll-mt-24 bg-ink-50">
         <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2">
           <SectionHeading
-            eyebrow="02 · Funding & SME Financing"
-            title="Make funding fit the growth plan."
-            body="We help Singapore SMEs understand relevant grant and financing routes, prepare for lender or programme review, and make informed comparisons. Eligibility and approval remain with the relevant agencies and lenders."
+            eyebrow="02 · Business & Financing Advisory"
+            title="Make clearer decisions about capital."
+            body="We advise businesses on financing options, cash flow, working capital and lender readiness—services that stand on their own, regardless of grant availability."
           />
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               {
-                t: 'Grant advisory',
-                d: 'Explore current grant pathways such as the EDGE Grant and Startup SG Founder, subject to programme requirements and business eligibility.'
+                t: 'Business financing strategy',
+                d: 'Clarify capital needs, business priorities and financing options before deciding how to fund the next stage of growth.',
               },
               {
-                t: 'EFS & loan structuring',
-                d: 'Understand relevant Enterprise Financing Scheme pathways and prepare a funding plan suited to your business needs.',
+                t: 'Cash flow & capital planning',
+                d: 'Review working capital, projected cash flow and planned use of funds to support informed business decisions.',
               },
               {
-                t: 'Funding readiness',
-                d: 'Organise use-of-funds, cash-flow assumptions and supporting documents before approaching a funding provider.',
+                t: 'Lender readiness',
+                d: 'Organise supporting documents and prepare for lender discussions, including a clear view of repayment capacity.',
               },
               {
-                t: 'Offer review',
-                d: 'Compare lender terms and effective interest rates where applicable, and clarify repayment obligations before committing.',
+                t: 'Optional grant support',
+                d: 'Where a suitable programme is available, grant review can be added as a separate service; it is not a condition of advisory support.',
               },
             ].map((x, i) => (
               <Reveal key={x.t} delay={i * 90} className="h-full">
@@ -104,7 +104,7 @@ export default function Services() {
             ))}
           </div>
           <p className="mt-8 text-sm leading-relaxed text-ink-500 lg:col-span-2">
-            {t('Miss Niu Tech is an advisor, not a lender. Grants and loans are not guaranteed; eligibility, approval, terms and repayment obligations are determined by the relevant programme administrator or lender.')}
+            {t('Miss Niu Tech provides advisory, not lending. Financing is not guaranteed; eligibility, approval, terms and repayment obligations are determined by the relevant lender.')}
           </p>
           <Link to="/sme-financing" className="mt-5 inline-flex rounded-full bg-coral-500 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-coral-600 lg:col-span-2">
             {t('Explore SME financing')}
@@ -184,7 +184,7 @@ export default function Services() {
         </div>
       </section>
 
-      <CTASection title="Let’s map your next growth move" body="Tell us what you’re planning, and we’ll help you identify the right people, funding pathway and technology support." />
+      <CTASection title="Let’s map your next growth move" body="Tell us what you’re planning, and we’ll help you identify the right advisors, financing strategy and technology support." />
     </>
   )
 }

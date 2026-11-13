@@ -7,7 +7,8 @@ import { site } from '../data/site'
 
 const interests = [
   'Compliance advisory',
-  'SME financing and grant support',
+  'Business and SME financing advisory',
+  'Optional grant support',
   'Technology and AI solutions',
   'Trade show management',
   'Not sure yet, advise me',

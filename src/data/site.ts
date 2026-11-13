@@ -25,9 +25,9 @@ export const serviceSummaries = [
   },
   {
     id: 'funding',
-    title: 'Funding & SME Financing',
+    title: 'Business & Financing Advisory',
     blurb:
-      'Grant advisory and EFS loan structuring help businesses understand funding routes, readiness and next steps.',
+      'Practical advice on business financing, cash flow, working capital and lender readiness.',
     icon: 'chart',
   },
   {

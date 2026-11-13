@@ -64,7 +64,7 @@ export default function Home() {
             />
           </h1>
           <p className={`mt-6 max-w-2xl text-lg leading-relaxed text-white/85 ${typed ? 'hero-anim' : 'opacity-0'}`}>
-            {t('We coordinate vetted compliance specialists, help businesses explore grants and financing options, and build technology that supports growth across borders.')}
+            {t('We coordinate vetted compliance specialists, advise on business and financing decisions, and build technology that supports growth across borders.')}
           </p>
           <div className={`mt-9 flex flex-wrap gap-3 sm:gap-4 ${typed ? 'hero-anim' : 'opacity-0'}`}>
             <Link
@@ -101,7 +101,7 @@ export default function Home() {
         <SectionHeading
           eyebrow="What we do"
           title="Three service pillars. One trusted advisor."
-          body="Compliance advisory, funding support and in-house technology—coordinated around your goals and the markets where you want to grow."
+          body="Compliance advisory, business and financing guidance, and in-house technology—coordinated around your goals and the markets where you want to grow."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {serviceSummaries.map((s, i) => (
