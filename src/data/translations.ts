@@ -123,6 +123,8 @@ export const simplifiedChinese: Record<string, string> = {
   "Digital customer journeys, AI-assisted content for lead generation, and campaign management across Meta, Google, Xiaohongshu and influencer channels.": "设计数字化客户旅程，运用人工智能辅助获客内容，并在 Meta、Google、小红书及网红渠道管理营销活动。",
 
   "Our Team": "我们的团队",
+  "Meet Our Team": "认识我们的团队",
+  "Meet Miss Niu Tech’s leadership, managers and delivery teams.": "认识 Miss Niu Tech 的管理层、经理及交付团队。",
   "The people behind the work": "推动项目落地的团队",
   "Meet the leaders and teams across company operations, technology development and consulting delivery.": "认识负责公司运营、技术开发及顾问交付的管理层与团队。",
   "Leads product development, training and company strategy.": "负责产品开发、培训及公司战略。",
@@ -558,6 +560,8 @@ export const simplifiedChinese: Record<string, string> = {
   "SME Financing in Singapore | Miss Niu Tech": "新加坡中小企业融资｜Miss Niu Tech",
   "Explore Singapore SME grant and financing pathways with practical support for funding readiness, scheme review and lender discussions. Approval is not guaranteed.": "了解新加坡中小企业补助与融资渠道，获得融资准备、计划审阅及贷款方沟通方面的实用支持。审批不获保证。",
   "About Miss Niu Tech | Bryan Ng, Founder & CEO": "关于 Miss Niu Tech｜创办人兼首席执行官 Bryan Ng",
+  "Meet the Team | Miss Niu Tech": "认识团队｜Miss Niu Tech",
+  "Meet Miss Niu Tech’s leadership, managers and teams in Singapore, including its AI engineering and consulting delivery teams.": "认识 Miss Niu Tech 在新加坡的管理层与团队，包括人工智能工程及顾问交付团队。",
   "Meet Bryan Ng and learn how Miss Niu Tech combines cross-border compliance advisory, SME financing support and technology delivery from Singapore.": "认识 Bryan Ng，了解 Miss Niu Tech 如何从新加坡整合跨境合规顾问、中小企业融资支持与科技交付。",
   "SME Financing": "中小企业融资",
   "Compliance advisory": "合规顾问服务",
