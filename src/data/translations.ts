@@ -401,4 +401,13 @@ export const simplifiedChinese: Record<string, string> = {
   "B2C: consumers and community voices": "B2C：消费者与社群意见领袖",
   "Where consumer access is available, meet beauty shoppers, product testers, makeup artists and beauty creators to hear feedback on products, packaging, pricing and messaging.": "如展会开放消费者入场，可与美妆消费者、产品体验者、化妆师及美妆创作者交流，了解他们对产品、包装、定价及品牌表达的反馈。",
   "This is a suggested meeting-effort allocation, not a verified attendee or visitor percentage. B2C engagement depends on each show’s access policy. Confirm current visitor profiles and rules with the organisers.": "这是建议的洽谈精力分配，并非经核实的参展者或观众比例。B2C 交流取决于各展会的入场政策，请向主办方确认最新观众构成与相关规定。",
+  "Official Singapore marketing partner": "新加坡官方市场推广合作伙伴",
+  "Meet IBE and CMBe through Miss Niu Tech": "通过 Miss Niu Tech 参与 IBE 与 CMBe",
+  "Miss Niu Tech is the official marketing partner in Singapore for International Beauty Expo (IBE) and CMBe (beautyexpo | cosmobeauté Malaysia). Contact us for current exhibitor and participation information.": "Miss Niu Tech 是 International Beauty Expo（IBE）和 CMBe（beautyexpo | cosmobeauté Malaysia）在新加坡的官方市场推广合作伙伴。请联系我们获取最新的参展与参与信息。",
+  "Worldwide customised trade show management": "全球定制化展会管理",
+  "Name the show. We’ll tailor the plan.": "告诉我们展会名称，我们为您定制方案。",
+  "Whether you have a specific show in mind or only a target country, Miss Niu Tech can tailor trade show research and management to your goals worldwide. We can help source suitable opportunities and coordinate a participation plan, subject to organiser availability and event requirements.": "无论您已有目标展会，还是只确定了目标国家，Miss Niu Tech 都可根据您的目标定制全球展会调研与管理方案。我们可协助寻找合适机会并统筹参展计划，具体取决于主办方可参展名额及展会要求。",
+  "From show research and exhibitor options to planning, logistics and post-show follow-up, the scope is customised to your business.": "从展会调研与参展方案，到规划、后勤协调及展后跟进，服务范围均可根据您的业务需求定制。",
+  "Name the show. We’ll build your plan.": "告诉我们展会名称，我们为您规划方案。",
+  "From IBE and CMBe in Singapore to customised trade show management worldwide, tell us where you want to exhibit and we’ll help organise the next steps.": "从新加坡的 IBE 与 CMBe，到全球定制化展会管理，告诉我们您想在哪里参展，我们将协助您规划下一步。",
 }
