@@ -1,14 +1,14 @@
 const membershipGroups = [
   {
-    name: "SBF Singapore Union",
+    name: "SBF Singapore",
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/SBF%20Singapore%20Union-yHyvbP3Og5kHQ7mdVVnVK2Zq55kLXp.png",
   },
   {
-    name: "ASME Singapore Union",
+    name: "ASME Singapore",
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ASME%20Singapore%20Union-wmG6UpgszeFAbK9ye8jsmgd2pV3uN7.jpeg",
   },
   {
-    name: "BNI Singapore Networking Union",
+    name: "BNI Singapore Networking",
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/BNI%20Singapore%20Networking%20Union-uTPlN91zMvkFTFBVMGu7PjU712z9GK.png",
   },
 ]
