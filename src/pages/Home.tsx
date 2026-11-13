@@ -22,7 +22,7 @@ const icons: Record<string, React.ReactNode> = {
 export default function Home() {
   const { t, i18n } = useTranslation()
   const isChinese = i18n.resolvedLanguage === 'zh-SG'
-  const publishedCaseStudies = caseStudies
+  const publishedCaseStudies = caseStudies.slice(0, 3)
   const [typed, setTyped] = useState(false)
   const heroSegments = useMemo(
     () => [
@@ -206,7 +206,7 @@ export default function Home() {
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.2em] text-coral-400">{t('Proven in the field')}</p>
               <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                {t('All cross-border case studies')}
+                {t('Selected case studies')}
               </h2>
             </div>
             <Link to="/about#case-studies" className="text-sm font-semibold text-coral-400 hover:text-coral-300">

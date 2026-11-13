@@ -79,8 +79,8 @@ export default function About() {
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading
             eyebrow="Case studies"
-            title="Completed engagements"
-            body="Summarised and anonymised in line with our confidentiality policy. We never publish client names, contract terms or private financials, and we're happy to sign an NDA to discuss relevant experience in detail."
+            title="Case studies & selected engagements"
+            body="Anonymised summaries drawn from our company portfolios and selected engagement record. Client names and contract terms are omitted; active and proposed work is labelled, and reported metrics reflect the source materials. We’re happy to sign an NDA to discuss relevant experience in detail."
           />
           <div className="mt-12 space-y-6">
             {caseStudies.map((c, i) => (
