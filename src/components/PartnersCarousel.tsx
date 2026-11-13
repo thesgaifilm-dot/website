@@ -2,7 +2,7 @@ import SectionHeading from './SectionHeading'
 
 const partners = [
   { src: '/media/partners/bee-rev.png', name: 'Bee Rev' },
-  { src: '/media/partners/cp-fergus.jpg', name: 'CP Fergus' },
+  { src: '/media/partners/cp-fergus-transparent.png', name: 'CP Fergus' },
   {
     src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Elite%20Expo%20Sdn%20Bhd-j97WnXd6YvjOSu9m8w53g1NCkroM1A.png',
     name: 'Elite Expo Sdn Bhd',
@@ -16,7 +16,7 @@ const partners = [
     name: 'Wecofa Pte Ltd',
   },
   {
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hua%20%26%20Hua%20Consulting-MqCzvDQxG3vYRSm0b73rZeGQy6zDaM.jpeg',
+    src: '/media/partners/hua-hua-consulting.png',
     name: 'Hua & Hua Consulting',
   },
 ]
