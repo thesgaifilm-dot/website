@@ -8,7 +8,7 @@ export interface PageMeta {
 export const defaultMeta: PageMeta = {
   title: 'Miss Niu Tech | Compliance Advisory & Growth Across Asia',
   description:
-    'Singapore-based cross-border compliance advisory, SME funding guidance and in-house technology solutions for businesses expanding across Asia.',
+    'Singapore-based cross-border compliance and business advisory, practical SME financing guidance, and in-house technology solutions for businesses expanding across Asia.',
 }
 
 /**
@@ -23,12 +23,12 @@ export const pageMeta: Record<string, PageMeta> = {
   '/services': {
     title: 'Services | Miss Niu Tech',
     description:
-      'Compliance advisory, grant and SME financing support, custom software and AI delivery, and global trade show management for businesses expanding across Asia.',
+      'Cross-border compliance and business advisory, SME financing strategy, custom software and AI delivery, and global trade show management for businesses expanding across Asia.',
   },
   '/sme-financing': {
     title: 'SME Financing in Singapore | Miss Niu Tech',
     description:
-      'Explore Singapore SME grant and financing pathways with practical support for funding readiness, scheme review and lender discussions. Approval is not guaranteed.',
+      'Practical Singapore SME financing advice on funding strategy, cash-flow planning and lender readiness. Financing decisions remain with the relevant lenders.',
   },
   '/trade-shows': {
     title: 'Trade Shows | Miss Niu Tech',
@@ -48,7 +48,7 @@ export const pageMeta: Record<string, PageMeta> = {
   '/about': {
     title: 'About Miss Niu Tech | Bryan Ng, Founder & Director',
     description:
-      'Meet Bryan Ng and learn how Miss Niu Tech combines cross-border compliance advisory, SME financing support and technology delivery from Singapore.',
+      'Meet Bryan Ng and learn how Miss Niu Tech combines cross-border compliance advisory, business financing guidance and technology delivery from Singapore.',
   },
   '/contact': {
     title: 'Contact Miss Niu Tech',

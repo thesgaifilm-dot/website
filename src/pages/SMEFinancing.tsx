@@ -7,12 +7,12 @@ import SectionHeading from '../components/SectionHeading'
 
 const fundingPaths = [
   {
-    title: 'Grant advisory',
-    body: 'Explore current grant pathways such as the EDGE Grant and Startup SG Founder, subject to programme requirements and business eligibility. Ongoing projects approved under earlier schemes may remain subject to their original terms.',
+    title: 'Financing strategy',
+    body: 'Clarify working capital, trade, equipment or expansion needs, then compare financing approaches against business cash flow and repayment capacity.',
   },
   {
     title: 'Enterprise Financing Scheme',
-    body: 'Review relevant EFS pathways and prepare a funding plan around working capital, trade, equipment or expansion needs, where an applicable scheme is available.',
+    body: 'Review relevant EFS pathways and prepare a financing plan around business needs, where an applicable scheme is available.',
   },
   {
     title: 'Bank and commercial financing',
@@ -23,13 +23,13 @@ const fundingPaths = [
 const steps = [
   {
     number: '01',
-    title: 'Understand the funding need',
-    body: 'We start with your business stage, purpose of funds, cash-flow position and planned use of capital.',
+    title: 'Understand the financing need',
+    body: 'We start with your business stage, purpose of funds, cash-flow position and planned use of capital.'
   },
   {
     number: '02',
-    title: 'Map possible routes',
-    body: 'We help identify relevant grant, EFS and commercial financing routes to investigate against current requirements.',
+    title: 'Compare financing options',
+    body: 'We compare relevant EFS, bank and commercial financing options against your operating needs and repayment capacity.'
   },
   {
     number: '03',
@@ -45,15 +45,15 @@ export default function SMEFinancing() {
     <>
       <PageHero
         title="SME Financing in Singapore"
-        subtitle="Funding strategy, practical readiness and clearer next steps."
+        subtitle="Financing strategy, practical readiness and clearer next steps."
         image="/media/hero-services.jpg"
       />
 
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading
-          eyebrow="Funding & growth"
-          title="Find a funding path that fits the business."
-          body="Miss Niu Tech helps Singapore SMEs understand grant and financing options, organise funding readiness and approach the right providers with a clearer plan."
+          eyebrow="Business & financing advisory"
+          title="Build a financing plan around the business."
+          body="Miss Niu Tech advises Singapore SMEs on financing options, cash-flow planning and lender readiness, helping businesses make decisions based on operating needs and repayment capacity."
         />
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {fundingPaths.map((path, index) => (
@@ -66,14 +66,17 @@ export default function SMEFinancing() {
             </Reveal>
           ))}
         </div>
+        <p className="mt-6 text-sm leading-relaxed text-ink-500">
+          {t('Optional additional support: grant review may be considered when a relevant programme fits, but it is not a prerequisite for financing advisory.')}
+        </p>
       </section>
 
       <section className="bg-ink-50">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading
             eyebrow="How we help"
-            title="From funding question to considered application."
-            body="A structured process helps you understand options before committing time or taking on a repayment obligation."
+            title="From financing question to a considered next step."
+            body="A structured advisory process helps you understand available financing options before committing time or taking on a repayment obligation."
             center
           />
           <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -94,7 +97,7 @@ export default function SMEFinancing() {
         <div className="rounded-2xl border border-coral-200 bg-coral-50 p-7 sm:p-9">
           <h2 className="text-xl font-bold text-ink-900">{t('Important financing information')}</h2>
           <p className="mt-3 max-w-4xl text-sm leading-relaxed text-ink-700">
-            {t('Miss Niu Tech is an advisory service, not a lender or grant administrator. Funding is not guaranteed. Eligibility, approval, available amounts, pricing and final terms are determined by the relevant programme administrator or lender and may change. Borrowers remain responsible for repayment under their loan agreements.')}
+            {t('Miss Niu Tech provides advisory, not lending. Financing is not guaranteed. Eligibility, approval, available amounts, pricing and final terms are determined by the relevant lender and may change. Borrowers remain responsible for repayment under their loan agreements.')}
           </p>
           <p className="mt-3 max-w-4xl text-sm leading-relaxed text-ink-700">
             {t('We confirm applicable routes and current requirements with you before proceeding. Always review official scheme guidance and obtain independent professional advice where appropriate.')}
@@ -106,8 +109,8 @@ export default function SMEFinancing() {
       </section>
 
       <CTASection
-        title="Let’s talk about your funding plan"
-        body="Tell us what you are building, what the funds are for and where you are in the process. We’ll help you map the next steps."
+        title="Let’s talk about your financing plan"
+        body="Tell us what you are building, what capital it needs and where you are in planning. We’ll help you map practical financing next steps."
       />
     </>
   )

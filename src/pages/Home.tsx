@@ -22,7 +22,7 @@ const icons: Record<string, React.ReactNode> = {
 export default function Home() {
   const { t, i18n } = useTranslation()
   const isChinese = i18n.resolvedLanguage === 'zh-SG'
-  const featured = caseStudies.slice(0, 3)
+  const publishedCaseStudies = caseStudies.slice(0, 3)
   const [typed, setTyped] = useState(false)
   const heroSegments = useMemo(
     () => [
@@ -64,7 +64,7 @@ export default function Home() {
             />
           </h1>
           <p className={`mt-6 max-w-2xl text-lg leading-relaxed text-white/85 ${typed ? 'hero-anim' : 'opacity-0'}`}>
-            {t('We coordinate vetted compliance specialists, help businesses explore grants and financing options, and build technology that supports growth across borders.')}
+            {t('We coordinate vetted compliance specialists, advise on business and financing decisions, and build technology that supports growth across borders.')}
           </p>
           <div className={`mt-9 flex flex-wrap gap-3 sm:gap-4 ${typed ? 'hero-anim' : 'opacity-0'}`}>
             <Link
@@ -101,7 +101,7 @@ export default function Home() {
         <SectionHeading
           eyebrow="What we do"
           title="Three service pillars. One trusted advisor."
-          body="Compliance advisory, funding support and in-house technology—coordinated around your goals and the markets where you want to grow."
+          body="Compliance advisory, business and financing guidance, and in-house technology—coordinated around your goals and the markets where you want to grow."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {serviceSummaries.map((s, i) => (
@@ -206,15 +206,15 @@ export default function Home() {
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.2em] text-coral-400">{t('Proven in the field')}</p>
               <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                {t('Recent cross-border wins')}
+                {t('Selected case studies')}
               </h2>
             </div>
             <Link to="/about#case-studies" className="text-sm font-semibold text-coral-400 hover:text-coral-300">
-              {t('View all case studies →')}
+              {t('View full case studies →')}
             </Link>
           </Reveal>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {featured.map((c, i) => (
+            {publishedCaseStudies.map((c, i) => (
               <Reveal key={c.id} delay={i * 110} className="h-full">
               <Link
                 to="/about#case-studies"
