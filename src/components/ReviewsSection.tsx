@@ -1,15 +1,17 @@
+import { useTranslation } from 'react-i18next'
 import SectionHeading from './SectionHeading'
 import { reviews } from '../data/reviews'
 import type { Review } from '../data/reviews'
 
 function Stars({ rating }: { rating: number }) {
+  const { t } = useTranslation()
   const star = (
     <svg viewBox="0 0 20 20" className="h-4 w-4" fill="currentColor" aria-hidden="true">
       <path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.9l-5.3 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
     </svg>
   )
   return (
-    <div className="relative inline-flex" aria-label={`Rated ${rating} out of 5`}>
+    <div className="relative inline-flex" aria-label={t('Rated {{rating}} out of 5', { rating })}>
       <div className="flex gap-0.5 text-ink-200">
         {[...Array(5)].map((_, i) => (
           <span key={i}>{star}</span>
@@ -30,10 +32,12 @@ function Stars({ rating }: { rating: number }) {
 }
 
 function ReviewCard({ review }: { review: Review }) {
+  const { t } = useTranslation()
+
   return (
     <div className="flex h-60 w-80 shrink-0 flex-col rounded-2xl border border-ink-100 bg-white p-6 shadow-sm sm:h-56 sm:w-96">
       <Stars rating={review.rating} />
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-700">{review.text}</p>
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-700">{t(review.text)}</p>
       <p className="mt-4 text-sm font-semibold text-ink-900">{review.name}</p>
     </div>
   )

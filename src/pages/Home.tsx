@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import StatsStrip from '../components/StatsStrip'
 import PartnersCarousel from '../components/PartnersCarousel'
@@ -18,8 +19,18 @@ const icons: Record<string, React.ReactNode> = {
 }
 
 export default function Home() {
+  const { t, i18n } = useTranslation()
+  const isChinese = i18n.resolvedLanguage === 'zh-SG'
   const featured = caseStudies.slice(0, 3)
   const [typed, setTyped] = useState(false)
+  const heroSegments = useMemo(
+    () => [
+      { text: `${t('We engineer')}${isChinese ? '' : ' '}` },
+      { text: t('growth'), className: 'text-coral-400' },
+      { text: `${isChinese ? '，' : ' '}${t('across borders, teams and technology')}` },
+    ],
+    [t, isChinese],
+  )
 
   return (
     <>
@@ -42,15 +53,11 @@ export default function Home() {
 
         <div className="relative mx-auto max-w-6xl px-4 py-28 sm:px-6 lg:py-40">
           <p className="hero-anim text-sm font-bold uppercase tracking-[0.25em] text-coral-400">
-            Miss Niu Technology · Singapore
+            {t('Miss Niu Technology · Singapore')}
           </p>
           <h1 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
             <Typewriter
-              segments={[
-                { text: 'We engineer ' },
-                { text: 'growth', className: 'text-coral-400' },
-                { text: ' across borders, teams and technology' },
-              ]}
+              segments={heroSegments}
               speed={32}
               startDelay={600}
               onDone={() => setTyped(true)}
@@ -61,20 +68,20 @@ export default function Home() {
               to="/contact"
               className="rounded-full bg-coral-500 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-coral-500/25 transition-colors hover:bg-coral-600"
             >
-              Book a Consultation
+              {t('Book a Consultation')}
             </Link>
             <Link
               to="/services"
               className="rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:border-coral-400 hover:text-coral-400"
             >
-              Explore Our Services
+              {t('Explore Our Services')}
             </Link>
           </div>
           <p
             className={`mt-10 text-xs font-medium uppercase tracking-[0.2em] text-ink-300 ${typed ? 'hero-anim' : 'opacity-0'}`}
             style={{ animationDelay: '0.45s' }}
           >
-            As featured on&nbsp;&nbsp;CNA&nbsp;&nbsp;·&nbsp;&nbsp;TODAY&nbsp;&nbsp;·&nbsp;&nbsp;Channel 8
+            {t('As featured on')}&nbsp;&nbsp;CNA&nbsp;&nbsp;·&nbsp;&nbsp;TODAY&nbsp;&nbsp;·&nbsp;&nbsp;Channel 8
           </p>
 
         </div>
@@ -105,9 +112,9 @@ export default function Home() {
                     {icons[s.icon]}
                   </svg>
                 </span>
-                <h3 className="mt-5 text-xl font-bold text-ink-900 group-hover:text-coral-600">{s.title}</h3>
-                <p className="mt-2 leading-relaxed text-ink-600">{s.blurb}</p>
-                <span className="mt-4 inline-block text-sm font-semibold text-coral-600">Learn more →</span>
+                <h3 className="mt-5 text-xl font-bold text-ink-900 group-hover:text-coral-600">{t(s.title)}</h3>
+                <p className="mt-2 leading-relaxed text-ink-600">{t(s.blurb)}</p>
+                <span className="mt-4 inline-block text-sm font-semibold text-coral-600">{t('Learn more →')}</span>
               </Link>
             </Reveal>
           ))}
@@ -134,36 +141,35 @@ export default function Home() {
                   <svg viewBox="0 0 24 24" className="mt-0.5 h-5 w-5 shrink-0 text-coral-500" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 13l4 4L19 7" />
                   </svg>
-                  {point}
+                  {t(point)}
                 </li>
               ))}
             </ul></Reveal>
           </div>
           <Reveal delay={180} className="h-full"><div className="rounded-2xl bg-white p-8 shadow-sm">
-            <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-coral-600">Our reach</h3>
+            <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-coral-600">{t('Our reach')}</h3>
             <div className="mt-5">
-              <p className="text-sm font-semibold text-ink-500">Own offices</p>
+              <p className="text-sm font-semibold text-ink-500">{t('Own offices')}</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {footprint.ownOffices.map((m) => (
                   <span key={m} className="rounded-full bg-ink-900 px-4 py-1.5 text-sm font-medium text-white">
-                    {m}
+                    {t(m)}
                   </span>
                 ))}
               </div>
             </div>
             <div className="mt-6">
-              <p className="text-sm font-semibold text-ink-500">Live working partners</p>
+              <p className="text-sm font-semibold text-ink-500">{t('Live working partners')}</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {footprint.partnerMarkets.map((m) => (
                   <span key={m} className="rounded-full border border-ink-200 px-4 py-1.5 text-sm text-ink-700">
-                    {m}
+                    {t(m)}
                   </span>
                 ))}
               </div>
             </div>
             <p className="mt-6 text-sm leading-relaxed text-ink-500">
-              Wherever you need to do business in Asia, we have people who can act: market
-              representative agreements, regulatory filings and everything in between.
+              {t('Wherever you need to do business in Asia, we have people who can act: market representative agreements, regulatory filings and everything in between.')}
             </p>
           </div></Reveal>
         </div>
@@ -182,8 +188,8 @@ export default function Home() {
             <Reveal key={s.step} delay={i * 110}>
               <div className="relative h-full rounded-2xl border border-ink-100 p-7">
                 <span className="text-5xl font-extrabold text-coral-100">{s.step}</span>
-                <h3 className="mt-3 text-lg font-bold text-ink-900">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.body}</p>
+                <h3 className="mt-3 text-lg font-bold text-ink-900">{t(s.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-600">{t(s.body)}</p>
               </div>
             </Reveal>
           ))}
@@ -195,13 +201,13 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <Reveal className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-coral-400">Proven in the field</p>
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-coral-400">{t('Proven in the field')}</p>
               <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                Recent cross-border wins
+                {t('Recent cross-border wins')}
               </h2>
             </div>
             <Link to="/about#case-studies" className="text-sm font-semibold text-coral-400 hover:text-coral-300">
-              View all case studies →
+              {t('View all case studies →')}
             </Link>
           </Reveal>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -212,21 +218,21 @@ export default function Home() {
                 className="group flex h-full flex-col rounded-2xl bg-ink-800 p-7 transition-colors hover:bg-ink-700"
               >
                 <p className="text-xs font-semibold uppercase tracking-wider text-ink-400">
-                  {c.jurisdictions.join(' · ')}
+                  {c.jurisdictions.map((jurisdiction) => t(jurisdiction)).join(' · ')}
                 </p>
                 <h3 className="mt-3 text-lg font-bold leading-snug text-white group-hover:text-coral-300">
-                  {c.title}
+                  {t(c.title)}
                 </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-300">{c.problem.slice(0, 140)}…</p>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-300">{t(c.problem).slice(0, 140)}…</p>
                 <p className="mt-5 border-t border-ink-700 pt-4 text-sm font-semibold text-coral-400">
-                  {c.highlight}
+                  {t(c.highlight)}
                 </p>
               </Link>
               </Reveal>
             ))}
           </div>
           <p className="mt-8 text-xs text-ink-500">
-            Case studies are anonymised to protect client confidentiality, a commitment we extend to you.
+            {t('Case studies are anonymised to protect client confidentiality, a commitment we extend to you.')}
           </p>
         </div>
       </section>

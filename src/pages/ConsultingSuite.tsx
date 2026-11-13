@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
@@ -39,6 +40,8 @@ const services = [
 ]
 
 export default function ConsultingSuite() {
+  const { t } = useTranslation()
+
   return (
     <>
       <PageHero
@@ -59,16 +62,16 @@ export default function ConsultingSuite() {
           {services.map((s, i) => (
             <Reveal key={s.name} delay={i * 100} className="h-full">
               <div className="flex h-full flex-col rounded-2xl border border-ink-100 bg-white p-8 shadow-sm transition-all hover:-translate-y-1 hover:border-coral-300 hover:shadow-lg">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-coral-600">{s.scope}</p>
-                <h3 className="mt-3 text-xl font-bold text-ink-900">{s.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink-600">{s.blurb}</p>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-coral-600">{t(s.scope)}</p>
+                <h3 className="mt-3 text-xl font-bold text-ink-900">{t(s.name)}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-600">{t(s.blurb)}</p>
                 <ul className="mt-5 flex-1 space-y-2.5">
                   {s.includes.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm text-ink-700">
                       <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-coral-500" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 13l4 4L19 7" />
                       </svg>
-                      {item}
+                      {t(item)}
                     </li>
                   ))}
                 </ul>
@@ -80,7 +83,7 @@ export default function ConsultingSuite() {
                   href={s.link}
                   className="mt-5 block rounded-full bg-coral-500 px-6 py-3.5 text-center text-sm font-semibold text-white shadow-lg shadow-coral-500/25 transition-colors hover:bg-coral-600"
                 >
-                  Checkout with Stripe
+                  {t('Checkout with Stripe')}
                 </a>
               </div>
             </Reveal>
@@ -88,9 +91,7 @@ export default function ConsultingSuite() {
         </div>
 
         <p className="mx-auto mt-10 max-w-xl text-center text-xs leading-relaxed text-ink-500">
-          Payments are processed by Stripe over an encrypted connection. Card details never
-          touch our servers. Invoiced engagements remain available. Contact us if your
-          company requires PO-based billing.
+          {t('Payments are processed by Stripe over an encrypted connection. Card details never touch our servers. Invoiced engagements remain available. Contact us if your company requires PO-based billing.')}
         </p>
       </section>
     </>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import Reveal from './Reveal'
 
 export default function SectionHeading({
@@ -11,13 +12,15 @@ export default function SectionHeading({
   body?: string
   center?: boolean
 }) {
+  const { t } = useTranslation()
+
   return (
     <Reveal className={`max-w-3xl ${center ? 'mx-auto text-center' : ''}`}>
       {eyebrow && (
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-coral-600">{eyebrow}</p>
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-coral-600">{t(eyebrow)}</p>
       )}
-      <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">{title}</h2>
-      {body && <p className="mt-4 text-lg leading-relaxed text-ink-600">{body}</p>}
+      <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">{t(title)}</h2>
+      {body && <p className="mt-4 text-lg leading-relaxed text-ink-600">{t(body)}</p>}
     </Reveal>
   )
 }

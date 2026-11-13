@@ -2,9 +2,12 @@ import SectionHeading from '../components/SectionHeading'
 import CTASection from '../components/CTASection'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
+import { useTranslation } from 'react-i18next'
 import { footprint } from '../data/site'
 
 export default function Services() {
+  const { t } = useTranslation()
+
   return (
     <>
       <PageHero
@@ -39,7 +42,7 @@ export default function Services() {
               <Reveal key={x.t} delay={i * 100} className="h-full">
                 <div className="h-full rounded-2xl border border-ink-100 p-7">
                   <h3 className="font-bold text-ink-900">{x.t}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{x.d}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{t(x.d)}</p>
                 </div>
               </Reveal>
             ))}
@@ -48,7 +51,7 @@ export default function Services() {
             <div className="flex flex-wrap gap-2">
               {[...footprint.ownOffices, ...footprint.partnerMarkets].map((m) => (
                 <span key={m} className="rounded-full bg-ink-50 px-4 py-1.5 text-sm text-ink-700">
-                  {m}
+                  {t(m)}
                 </span>
               ))}
             </div>
@@ -87,7 +90,7 @@ export default function Services() {
                 <div className="h-full rounded-2xl bg-white p-6 shadow-sm">
                   <span className="text-sm font-bold text-coral-500">0{i + 1}</span>
                   <h3 className="mt-1 font-bold text-ink-900">{x.t}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{x.d}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{t(x.d)}</p>
                 </div>
               </Reveal>
             ))}
@@ -126,7 +129,7 @@ export default function Services() {
                 <div className="h-full rounded-2xl border border-ink-100 p-6">
                   <span className="text-sm font-bold text-coral-500">0{i + 1}</span>
                   <h3 className="mt-1 font-bold text-ink-900">{x.t}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{x.d}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{t(x.d)}</p>
                 </div>
               </Reveal>
             ))}
@@ -156,7 +159,7 @@ export default function Services() {
               <Reveal key={x.t} delay={i * 100} className="h-full">
                 <div className="h-full rounded-2xl bg-white p-7 shadow-sm">
                   <h3 className="font-bold text-ink-900">{x.t}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{x.d}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{t(x.d)}</p>
                 </div>
               </Reveal>
             ))}
