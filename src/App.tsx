@@ -11,6 +11,7 @@ import TradeShows from './pages/TradeShows'
 import Guides from './pages/Guides'
 import SMEFinancing from './pages/SMEFinancing'
 import About from './pages/About'
+import Team from './pages/Team'
 import Contact from './pages/Contact'
 import ConsultingSuite from './pages/ConsultingSuite'
 import SiteAnalytics from './pages/SiteAnalytics'
@@ -73,6 +74,7 @@ export default function App() {
           <Route path="/guides" element={<Guides />} />
           <Route path="/sme-financing" element={<SMEFinancing />} />
           <Route path="/about" element={<About />} />
+          <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
           {/* Linked from the navbar and listed in the sitemap */}
           <Route path="/consulting-suite-mq7x" element={<ConsultingSuite />} />

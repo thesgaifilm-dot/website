@@ -5,6 +5,7 @@ import CTASection from '../components/CTASection'
 import StatsStrip from '../components/StatsStrip'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
+import TeamDirectory from '../components/TeamDirectory'
 import { caseStudies } from '../data/caseStudies'
 
 const timeline = [
@@ -46,7 +47,7 @@ export default function About() {
         <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr]">
           <div>
             <SectionHeading
-              eyebrow="Founder & Director"
+              eyebrow="Founder & CEO"
               title="Bryan Ng"
               body="A cross-border operator since 2019, Bryan combines regional business development experience with a practical network across Singapore and China."
             />
@@ -71,8 +72,9 @@ export default function About() {
         </div>
       </section>
 
-      <StatsStrip />
+      <TeamDirectory />
 
+      <StatsStrip />
 
       {/* Case studies */}
       <section id="case-studies" className="scroll-mt-24 bg-ink-50">

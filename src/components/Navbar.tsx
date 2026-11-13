@@ -6,6 +6,7 @@ import Logo from './Logo'
 
 const pageLinks = [
   { to: '/about', label: 'About Us' },
+  { to: '/team', label: 'Our Team' },
   { to: '/sme-financing', label: 'SME Financing' },
   { to: '/services#grants', label: 'SME Grants' },
   { to: '/guides', label: 'Compliance Guides' },
