@@ -46,8 +46,8 @@ export const simplifiedChinese: Record<string, string> = {
   "Three documents. Three steps.": "三份文件，三个步骤。",
   "We built our process so that busy owners barely lift a finger.": "我们的流程为繁忙的企业负责人而设计，让您轻松推进每一步。",
   "Proven in the field": "实战验证",
-  "Recent cross-border wins": "近期跨境项目成果",
-  "View all case studies →": "查看全部案例 →",
+  "All cross-border case studies": "全部跨境案例",
+  "View full case studies →": "查看完整案例 →",
   "Case studies are anonymised to protect client confidentiality, a commitment we extend to you.": "所有案例均已匿名处理，以保护客户机密；我们也将同样的保密承诺提供给您。",
 
   "Businesses advised since 2019": "自 2019 年以来接受咨询的企业",
