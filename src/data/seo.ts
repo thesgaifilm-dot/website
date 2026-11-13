@@ -46,7 +46,7 @@ export const pageMeta: Record<string, PageMeta> = {
       'Three fixed-price consulting engagements, bookable directly: a growth strategy consultation, an HR & workforce compliance audit, and an overseas market-entry blueprint.',
   },
   '/about': {
-    title: 'About Miss Niu Tech | Bryan Ng, Founder & Director',
+    title: 'About Miss Niu Tech | Bryan Ng, Founder & CEO',
     description:
       'Meet Bryan Ng and learn how Miss Niu Tech combines cross-border compliance advisory, business financing guidance and technology delivery from Singapore.',
   },
