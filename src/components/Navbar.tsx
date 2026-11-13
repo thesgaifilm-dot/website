@@ -1,151 +1,66 @@
 import { useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
 import Logo from './Logo'
 
-const linksBeforeResources = [
+const pageLinks = [
   { to: '/', label: 'Home' },
   { to: '/services', label: 'Services' },
-]
-
-const linksAfterResources = [
-  { to: '/consulting-suite-mq7x', label: 'Book Consulting' },
-  { to: '/about', label: 'About Us' },
-  { to: '/contact', label: 'Contact' },
-]
-
-const resourceLinks = [
   { to: '/sme-financing', label: 'SME Financing' },
   { to: '/trade-shows', label: 'Trade Shows' },
   { to: '/guides', label: 'Guides' },
+  { to: '/consulting-suite-mq7x', label: 'Book Consulting' },
+  { to: '/about', label: 'About Us' },
+  { to: '/contact', label: 'Contact', primary: true },
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const [resourcesOpen, setResourcesOpen] = useState(false)
   const { t } = useTranslation()
-  const location = useLocation()
-  const resourcesActive = resourceLinks.some((link) => link.to === location.pathname)
 
-  const closeMenus = () => {
-    setOpen(false)
-    setResourcesOpen(false)
-  }
+  const closeMenu = () => setOpen(false)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink-100 bg-white/90 backdrop-blur">
-      <nav className="mx-auto flex h-18 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link to="/" onClick={closeMenus} aria-label={t('Miss Niu Technology, home')}>
+    <header className="sticky top-0 z-50 border-b border-ink-100 bg-white/95 backdrop-blur">
+      <nav aria-label={t('Main navigation')} className="mx-auto flex min-h-18 max-w-screen-2xl items-center justify-between gap-4 px-4 sm:px-6">
+        <Link to="/" onClick={closeMenu} aria-label={t('Miss Niu Technology, home')} className="shrink-0">
           <Logo />
         </Link>
 
-        <div className="hidden items-center gap-6 xl:flex">
-          {linksBeforeResources.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              onClick={closeMenus}
-              className={({ isActive }) =>
-                `text-sm font-medium transition-colors ${
-                  isActive ? 'text-coral-600' : 'text-ink-700 hover:text-coral-600'
-                }`
-              }
-            >
-              {t(link.label)}
-            </NavLink>
-          ))}
-
-          <div
-            className="relative"
-            onBlur={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-                setResourcesOpen(false)
-              }
-            }}
-            onKeyDown={(event) => {
-              if (event.key === 'Escape') setResourcesOpen(false)
-            }}
-          >
-            <button
-              type="button"
-              aria-expanded={resourcesOpen}
-              aria-controls="desktop-resources-menu"
-              onClick={() => setResourcesOpen((isOpen) => !isOpen)}
-              className={`flex items-center gap-1.5 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-coral-500 ${
-                resourcesActive || resourcesOpen
-                  ? 'text-coral-600'
-                  : 'text-ink-700 hover:text-coral-600'
-              }`}
-            >
-              {t('Resources')}
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 20 20"
-                className={`h-4 w-4 transition-transform ${resourcesOpen ? 'rotate-180' : ''}`}
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
+        <div className="hidden min-w-0 flex-1 items-center justify-between gap-3 xl:flex">
+          <div className="ml-auto flex min-w-0 flex-1 items-center justify-between gap-1">
+            {pageLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                onClick={closeMenu}
+                end={link.to === '/'}
+                className={({ isActive }) =>
+                  `whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral-500 ${
+                    link.primary
+                      ? 'bg-coral-500 text-white shadow-sm hover:bg-coral-600'
+                      : isActive
+                        ? 'bg-coral-50 text-coral-700'
+                        : 'text-ink-700 hover:bg-ink-50 hover:text-coral-700'
+                  }`
+                }
               >
-                <path d="m5 7.5 5 5 5-5" />
-              </svg>
-            </button>
-            <div
-              id="desktop-resources-menu"
-              hidden={!resourcesOpen}
-              className="absolute left-0 top-full z-20 mt-3 min-w-48 rounded-xl border border-ink-100 bg-white p-2 shadow-lg"
-            >
-              {resourceLinks.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  onClick={closeMenus}
-                  className={({ isActive }) =>
-                    `block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
-                      isActive ? 'bg-coral-50 text-coral-700' : 'text-ink-700 hover:bg-ink-50'
-                    }`
-                  }
-                >
-                  {t(link.label)}
-                </NavLink>
-              ))}
-            </div>
+                {t(link.label)}
+              </NavLink>
+            ))}
           </div>
-
-          {linksAfterResources.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              onClick={closeMenus}
-              className={({ isActive }) =>
-                `text-sm font-medium transition-colors ${
-                  isActive ? 'text-coral-600' : 'text-ink-700 hover:text-coral-600'
-                }`
-              }
-            >
-              {t(link.label)}
-            </NavLink>
-          ))}
-          <LanguageSwitcher />
-          <Link
-            to="/contact"
-            onClick={closeMenus}
-            className="rounded-full bg-coral-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-coral-600"
-          >
-            {t('Book a Consultation')}
-          </Link>
+          <LanguageSwitcher className="shrink-0" />
         </div>
 
-        <div className="flex items-center gap-2 xl:hidden">
+        <div className="flex shrink-0 items-center gap-2 xl:hidden">
           <LanguageSwitcher />
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-ink-800"
-            onClick={() => {
-              setOpen((isOpen) => !isOpen)
-              setResourcesOpen(false)
-            }}
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-ink-800 transition-colors hover:bg-ink-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-coral-500"
+            onClick={() => setOpen((isOpen) => !isOpen)}
             aria-expanded={open}
+            aria-controls="mobile-page-navigation"
             aria-label={open ? t('Close menu') : t('Open menu')}
           >
             <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
@@ -156,82 +71,28 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="border-t border-ink-100 bg-white px-4 pb-6 pt-2 xl:hidden">
-          {linksBeforeResources.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              onClick={closeMenus}
-              className={({ isActive }) =>
-                `block py-3 text-base font-medium ${isActive ? 'text-coral-600' : 'text-ink-800'}`
-              }
-            >
-              {t(link.label)}
-            </NavLink>
-          ))}
-
-          <button
-            type="button"
-            aria-expanded={resourcesOpen}
-            aria-controls="mobile-resources-menu"
-            onClick={() => setResourcesOpen((isOpen) => !isOpen)}
-            onKeyDown={(event) => {
-              if (event.key === 'Escape') setResourcesOpen(false)
-            }}
-            className={`flex w-full items-center justify-between py-3 text-left text-base font-medium ${
-              resourcesActive || resourcesOpen ? 'text-coral-600' : 'text-ink-800'
-            }`}
-          >
-            {t('Resources')}
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 20 20"
-              className={`h-4 w-4 transition-transform ${resourcesOpen ? 'rotate-180' : ''}`}
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-            >
-              <path d="m5 7.5 5 5 5-5" />
-            </svg>
-          </button>
-          <div
-            id="mobile-resources-menu"
-            hidden={!resourcesOpen}
-            className="mb-2 border-l-2 border-ink-100 pl-4"
-          >
-            {resourceLinks.map((link) => (
+        <div id="mobile-page-navigation" className="border-t border-ink-100 bg-white px-4 pb-5 pt-2 xl:hidden">
+          <div className="mx-auto grid max-w-screen-2xl gap-1 sm:grid-cols-2">
+            {pageLinks.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
-                onClick={closeMenus}
+                onClick={closeMenu}
+                end={link.to === '/'}
                 className={({ isActive }) =>
-                  `block py-2.5 text-sm font-medium ${isActive ? 'text-coral-600' : 'text-ink-700'}`
+                  `rounded-xl px-4 py-3 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-coral-500 ${
+                    link.primary
+                      ? 'bg-coral-500 text-white hover:bg-coral-600'
+                      : isActive
+                        ? 'bg-coral-50 text-coral-700'
+                        : 'text-ink-800 hover:bg-ink-50'
+                  }`
                 }
               >
                 {t(link.label)}
               </NavLink>
             ))}
           </div>
-
-          {linksAfterResources.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              onClick={closeMenus}
-              className={({ isActive }) =>
-                `block py-3 text-base font-medium ${isActive ? 'text-coral-600' : 'text-ink-800'}`
-              }
-            >
-              {t(link.label)}
-            </NavLink>
-          ))}
-          <Link
-            to="/contact"
-            onClick={closeMenus}
-            className="mt-3 block rounded-full bg-coral-500 px-5 py-3 text-center text-sm font-semibold text-white"
-          >
-            {t('Book a Consultation')}
-          </Link>
         </div>
       )}
     </header>

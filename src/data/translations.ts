@@ -9,6 +9,7 @@ export const simplifiedChinese: Record<string, string> = {
   "Open menu": "展开菜单",
   "Close menu": "关闭菜单",
   "Choose language": "选择语言",
+  "Main navigation": "主要导航",
   "Switch to English": "切换至英文",
   "Switch to Simplified Chinese": "切换至简体中文",
   "Explore": "探索",
